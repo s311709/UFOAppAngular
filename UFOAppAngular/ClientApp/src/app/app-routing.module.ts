@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'
-import { IndexComponent } from './index/index.component';
+import { RegistrerteObservasjonerComponent } from './registrerte-observasjoner/registrerte-observasjoner.component';
 import { NavMenyComponent } from './nav-meny/nav-meny.component';
+import { LoggInnComponent } from './logg-inn/logg-inn.component';
 
 
 //Deklarer appRoot med paths
 const appRoots: Routes = [
-    { path: 'index', component: IndexComponent },
+    { path: 'registrerte-observasjoner', component: RegistrerteObservasjonerComponent },
     { path: 'nav-meny', component: NavMenyComponent },
+    { path: 'logg-inn', component: LoggInnComponent },
     //Default eller localhost
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    { path: '', redirectTo: 'logg-inn', pathMatch: 'full' }
     ]
 //importerer og eksporterer RouterModule
 @NgModule({

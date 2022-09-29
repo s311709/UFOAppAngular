@@ -5,15 +5,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
+import { RegistrerteObservasjonerComponent } from './registrerte-observasjoner/registrerte-observasjoner.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavMenyComponent } from './nav-meny/nav-meny.component';
+import { LoggInnComponent } from './logg-inn/logg-inn.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
-    NavMenyComponent
+    RegistrerteObservasjonerComponent,
+    NavMenyComponent,
+    LoggInnComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
