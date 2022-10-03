@@ -1,1 +1,33 @@
-<p>registrerte observasjoner works!</p>
+<div class="container">
+    <h2>   Registrerte observasjoner </h2>
+    <div>
+        <div class="col-md-12">
+            <div *ngIf="laster">Laster observasjoner.....</div>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>UFO</th>
+                        <th>Tidsstempel</th>
+                        <th>Kommune</th>
+                        <th>Beskrivelse</th>
+                        <th>Observatør</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let kunde of alleKunder">
+                    <tr>
+                        <td>{{kunde.fornavn}}</td>
+                        <td>{{kunde.etternavn}}</td>
+                        <td>{{kunde.adresse}}</td>
+                        <td>{{kunde.postnr}}</td>
+                        <td>{{kunde.poststed}}</td>
+                        <td><button class="btn btn-danger" (click)="sletteKunde(kunde.id)">Slett</button></td>
+                        <td><button class="btn btn-success" [routerLink]="['/endre',kunde.id]">Endre</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class='btn btn-primary' routerLink="/lagre">Registrer observasjon</button>
+        </div>
+    </div>
+</div>
