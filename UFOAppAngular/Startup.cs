@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using UFOAppAngular.DAL;
 
 namespace UFOAppAngular
 {
@@ -20,7 +22,13 @@ namespace UFOAppAngular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            //Denne lar oss bruke controlleren
+            services.AddControllers();
+            //Denne lar oss bruke contexten//databasen
+            services.AddDbContext<UFOContext>(options =>
+                            options.UseSqlite("Data Source = UFO.db"));
+            //Denne gjør at vi kan bruke IRepository
+            services.AddScoped<IUFORepository, UFORepository>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -29,11 +37,13 @@ namespace UFOAppAngular
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                loggerFactory.AddFile("Logs/UFOLogg.txt");
+                DBInit.Initialize(app);
             }
             else
             {
@@ -53,9 +63,7 @@ namespace UFOAppAngular
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>
