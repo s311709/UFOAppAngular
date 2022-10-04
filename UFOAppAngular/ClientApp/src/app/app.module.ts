@@ -8,13 +8,15 @@ import { RegistrerteObservasjonerComponent } from './registrerte-observasjoner/r
 import { AppRoutingModule } from './app-routing.module';
 import { NavMenyComponent } from './nav-meny/nav-meny.component';
 import { LoggInnComponent } from './logg-inn/logg-inn.component';
+import { LagreObservasjonComponent } from './lagre-observasjon/lagre-observasjon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrerteObservasjonerComponent,
     NavMenyComponent,
-    LoggInnComponent
+    LoggInnComponent,
+    LagreObservasjonComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
