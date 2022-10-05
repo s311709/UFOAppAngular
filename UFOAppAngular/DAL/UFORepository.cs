@@ -289,5 +289,61 @@ namespace UFOAppAngular.DAL
             }
 
         }
+
+        public async Task<bool> SlettObservasjon (int id)
+        {
+            try
+            {
+                //Finner observasjon som skal slettes
+                EnkeltObservasjon enkeltObservasjon = await _db.EnkeltObservasjoner.FindAsync(id);
+              
+                //Finner tilknyttet UFO og observatør
+                UFO enkeltObservasjonUFO =  await _db.UFOer.FirstOrDefaultAsync(u => u.Id == enkeltObservasjon.ObservertUFO.Id);
+                Observator enkeltObservasjonObservator =  await _db.Observatorer.FirstOrDefaultAsync(o => o.Id == enkeltObservasjon.Observator.Id);
+
+                //Fjerner observasjonen fra listene
+                enkeltObservasjonUFO.Observasjoner.Remove(enkeltObservasjon);
+                enkeltObservasjonObservator.RegistrerteObservasjoner.Remove(enkeltObservasjon);
+
+                //Dekrementerer antall ganger observert teller
+                enkeltObservasjonUFO.GangerObservert--;
+                enkeltObservasjonObservator.AntallRegistrerteObservasjoner--;
+
+                //Sist observert resettes
+                enkeltObservasjonUFO.SistObservert = new DateTime();
+                enkeltObservasjonObservator.SisteObservasjon = new DateTime();
+
+                foreach (EnkeltObservasjon observasjon in enkeltObservasjonUFO.Observasjoner) { 
+
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > enkeltObservasjonUFO.SistObservert)
+                    {
+                        enkeltObservasjonUFO.SistObservert = observasjon.TidspunktObservert;
+                    }
+                }
+
+                foreach (EnkeltObservasjon observasjon in enkeltObservasjonObservator.RegistrerteObservasjoner)
+                {
+
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > enkeltObservasjonObservator.SisteObservasjon)
+                    {
+                        enkeltObservasjonObservator.SisteObservasjon = observasjon.TidspunktObservert;
+                    }
+                }
+
+                //Enkeltobservasjon fjernes fra databasen
+                _db.EnkeltObservasjoner.Remove(enkeltObservasjon);
+
+                //Endringer i databasen lagres
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+        }
     }
 }
