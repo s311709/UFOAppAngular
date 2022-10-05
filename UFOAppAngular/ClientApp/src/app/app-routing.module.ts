@@ -4,6 +4,7 @@ import { RegistrerteObservasjonerComponent } from './registrerte-observasjoner/r
 import { NavMenyComponent } from './nav-meny/nav-meny.component';
 import { LoggInnComponent } from './logg-inn/logg-inn.component';
 import { LagreObservasjonComponent } from './lagre-observasjon/lagre-observasjon.component';
+import { EndreObservasjonComponent } from './endre-observasjon/endre-observasjon.component';
 
 
 //Deklarer appRoot med paths
@@ -12,6 +13,7 @@ const appRoots: Routes = [
     { path: 'lagre-observasjon', component: LagreObservasjonComponent },
     { path: 'nav-meny', component: NavMenyComponent },
     { path: 'logg-inn', component: LoggInnComponent },
+    { path: 'endre-observasjon', component: EndreObservasjonComponent },
     //Default eller localhost
     { path: '', redirectTo: 'logg-inn', pathMatch: 'full' }
     ]
