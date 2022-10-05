@@ -15,9 +15,9 @@ namespace UFOAppAngular.DAL
         Task<List<UFO>> HentAlleUFOer();
 
         Task<UFO> HentEnUFO(string kallenavn);
-        Task<List<Observatør>> HentAlleObservatører();
+        Task<List<Observator>> HentAlleObservatorer();
 
-        Task<Observatør> HentEnObservatør(string fornavn, string etternavn);
+        Task<Observator> HentEnObservator(string fornavn, string etternavn);
 
 
 

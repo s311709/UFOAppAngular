@@ -14,7 +14,7 @@ namespace UFOAppAngular.DAL
         public DateTime TidspunktObservert { get; set; } //Dato+klokkeslett
         public string KommuneObservert { get; set; }
         public string BeskrivelseAvObservasjon { get; set; }
-        virtual public Observatør Observatør { get; set; }
+        virtual public Observator Observator { get; set; }
         virtual public UFO ObservertUFO { get; set; }
     }
 
@@ -31,7 +31,7 @@ namespace UFOAppAngular.DAL
         public DateTime SistObservert { get; set; }
     }
 
-    public class Observatør
+    public class Observator
     {
         [Key]
         public int Id { get; set; }
@@ -60,7 +60,7 @@ namespace UFOAppAngular.DAL
 
         public DbSet<UFO> UFOer { get; set; }
         public DbSet<EnkeltObservasjon> EnkeltObservasjoner { get; set; }
-        public DbSet<Observatør> Observatører { get; set; }
+        public DbSet<Observator> Observatorer { get; set; }
         
         //Denne gjør det mulig å bruke lazy loading til atributtene som er virtual
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -5,8 +5,8 @@
     kommuneObservert: string;
     beskrivelseAvObservasjon: string;
     modell: string;
-    fornavnObservatør: string;
-    etternavnObservatør: string;
-    telefonObservatør: string;
-    epostObservatør: string;
+    fornavnObservator: string;
+    etternavnObservator: string;
+    telefonObservator: string;
+    epostObservator: string;
 }

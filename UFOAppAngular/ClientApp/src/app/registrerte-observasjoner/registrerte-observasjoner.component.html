@@ -6,11 +6,12 @@
             <table class="table table-bordered table-condensed">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>UFO</th>
                         <th>Tidsstempel</th>
                         <th>Kommune</th>
                         <th>Beskrivelse</th>
-                        <th>Observatør</th>
+                        <th>Observator</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -22,6 +23,8 @@
                         <td>{{observajon.tidspunktObservert}}</td>
                         <td>{{observajon.kommuneObservert}}</td>
                         <td>{{observajon.beskrivelseAvObservasjon}}</td>
+                        <td>{{observajon.fornavnObservator}} {{observajon.etternavnObservator}}</td>
+
                         <!-- <td><button class="btn btn-danger" (click)="sletteKunde(kunde.id)">Slett</button></td>
     <td><button class="btn btn-success" [routerLink]="['/endre',kunde.id]">Endre</button></td>-->
                     </tr>

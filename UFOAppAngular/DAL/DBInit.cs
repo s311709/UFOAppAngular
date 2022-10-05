@@ -20,9 +20,9 @@ namespace UFOAppAngular.DAL
                 context.Database.EnsureCreated();
 
 
-                var observatør1 = new Observatør { Fornavn = "Per", Etternavn = "Nydalen", Telefon = "74295105", Epost = "pnydalen@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
-                var observatør2 = new Observatør { Fornavn = "Johanne", Etternavn = "Viken", Telefon = "79376924", Epost = "jviken@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
-                var observatør3 = new Observatør { Fornavn = "Erik", Etternavn = "Hansen", Telefon = "67478474", Epost = "ehansen@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
+                var observator1 = new Observator { Fornavn = "Per", Etternavn = "Nydalen", Telefon = "74295105", Epost = "pnydalen@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
+                var observator2 = new Observator { Fornavn = "Johanne", Etternavn = "Viken", Telefon = "79376924", Epost = "jviken@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
+                var observator3 = new Observator { Fornavn = "Erik", Etternavn = "Hansen", Telefon = "67478474", Epost = "ehansen@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
 
                 var ufo1 = new UFO { Kallenavn = "Nyttårs-UFOen", Modell = "Flygende tallerken", Observasjoner = new List<EnkeltObservasjon>(), GangerObservert=0 };
                 var ufo2 = new UFO { Kallenavn = "Korn-UFOen i Østfold", Modell = "Kornåker-UFO", Observasjoner = new List<EnkeltObservasjon>(), GangerObservert=0 };
@@ -34,7 +34,7 @@ namespace UFOAppAngular.DAL
                     TidspunktObservert = new DateTime(2022, 01, 01, 0, 0, 0),
                     KommuneObservert = "Oslo",
                     BeskrivelseAvObservasjon = "UFOen fløy over Stortinget under nyttårsfeiringen",
-                    Observatør = observatør1,
+                    Observator = observator1,
                     ObservertUFO = ufo1
                 };
 
@@ -43,7 +43,7 @@ namespace UFOAppAngular.DAL
                     TidspunktObservert = new DateTime(2005, 01, 01, 0, 0, 0),
                     KommuneObservert = "Narvik",
                     BeskrivelseAvObservasjon = "UFOen kunne sees over sjøen der det ikke var raketter",
-                    Observatør = observatør1,
+                    Observator = observator1,
                     ObservertUFO = ufo1
                 };
 
@@ -52,7 +52,7 @@ namespace UFOAppAngular.DAL
                     TidspunktObservert = new DateTime(2009, 04, 21, 8, 30, 0),
                     KommuneObservert = "Halden",
                     BeskrivelseAvObservasjon = "Sirkelfenomen i åker",
-                    Observatør = observatør2,
+                    Observator = observator2,
                     ObservertUFO = ufo2
                 };
 
@@ -61,7 +61,7 @@ namespace UFOAppAngular.DAL
                     TidspunktObservert = new DateTime(2010, 9, 4, 8, 30, 0),
                     KommuneObservert = "Våler",
                     BeskrivelseAvObservasjon = "Ødelagte avlinger pga UFO-aktivitet",
-                    Observatør = observatør3,
+                    Observator = observator3,
                     ObservertUFO = ufo2
                 };
 
@@ -71,10 +71,10 @@ namespace UFOAppAngular.DAL
                 ufo2.Observasjoner.Add(observasjon3);
                 ufo2.Observasjoner.Add(observasjon4);
 
-                observatør1.RegistrerteObservasjoner.Add(observasjon1);
-                observatør1.RegistrerteObservasjoner.Add(observasjon2);
-                observatør2.RegistrerteObservasjoner.Add(observasjon3);
-                observatør3.RegistrerteObservasjoner.Add(observasjon4);
+                observator1.RegistrerteObservasjoner.Add(observasjon1);
+                observator1.RegistrerteObservasjoner.Add(observasjon2);
+                observator2.RegistrerteObservasjoner.Add(observasjon3);
+                observator3.RegistrerteObservasjoner.Add(observasjon4);
 
                 //Legger til inkrementerings-atributter
                 ufo1.SistObservert = new DateTime(); //setter først dato-tid til lavest mulige verdi for å kunne finne dato sist observert 
@@ -102,38 +102,38 @@ namespace UFOAppAngular.DAL
                 }
 
 
-                observatør1.SisteObservasjon = new DateTime();
-                observatør2.SisteObservasjon = new DateTime();
-                observatør3.SisteObservasjon = new DateTime();
+                observator1.SisteObservasjon = new DateTime();
+                observator2.SisteObservasjon = new DateTime();
+                observator3.SisteObservasjon = new DateTime();
 
-                foreach (var observasjon in observatør1.RegistrerteObservasjoner)
+                foreach (var observasjon in observator1.RegistrerteObservasjoner)
                 {
                     //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
-                    observatør1.AntallRegistrerteObservasjoner++;
+                    observator1.AntallRegistrerteObservasjoner++;
                     //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > observatør1.SisteObservasjon)
+                    if (observasjon.TidspunktObservert > observator1.SisteObservasjon)
                     {
-                        observatør1.SisteObservasjon = observasjon.TidspunktObservert;
+                        observator1.SisteObservasjon = observasjon.TidspunktObservert;
                     }
                 }
-                foreach (var observasjon in observatør2.RegistrerteObservasjoner)
+                foreach (var observasjon in observator2.RegistrerteObservasjoner)
                 {
                     //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
-                    observatør2.AntallRegistrerteObservasjoner++;
+                    observator2.AntallRegistrerteObservasjoner++;
                     //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > observatør2.SisteObservasjon)
+                    if (observasjon.TidspunktObservert > observator2.SisteObservasjon)
                     {
-                        observatør2.SisteObservasjon = observasjon.TidspunktObservert;
+                        observator2.SisteObservasjon = observasjon.TidspunktObservert;
                     }
                 }
-                foreach (var observasjon in observatør3.RegistrerteObservasjoner)
+                foreach (var observasjon in observator3.RegistrerteObservasjoner)
                 {
                     //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
-                    observatør3.AntallRegistrerteObservasjoner++;
+                    observator3.AntallRegistrerteObservasjoner++;
                     //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > observatør3.SisteObservasjon)
+                    if (observasjon.TidspunktObservert > observator3.SisteObservasjon)
                     {
-                        observatør3.SisteObservasjon = observasjon.TidspunktObservert;
+                        observator3.SisteObservasjon = observasjon.TidspunktObservert;
                     }
                 }
                 context.Add(observasjon1);

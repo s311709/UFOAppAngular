@@ -1,1 +1,18 @@
-<p>lagre-observasjon works!</p>
+<div class="container">
+    <div class="col-md-4">
+        <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
+            <div class="form-group">
+                <label>Fornavn observator</label>
+                <input class="form-control" formControlName="fornavnObservator" />
+                <p class="alert alert-warning" [hidden]="skjema.controls.fornavnObservator.valid || (skjema.controls.fornavnObservator.pristine && !submitted)">
+                    Fornavn er obligatorisk.
+                </p>
+            </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="!skjema.valid" class="btn btn-primary">Registrer</button>
+                <button class="btn btn-default" routerLink="/liste">Tilbake</button>
+            </div>
+        </form>
+    </div>
+</div>
+

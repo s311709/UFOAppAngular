@@ -27,23 +27,23 @@ namespace UFOAppAngular.DAL
             {
 
                 //Først sjekkes det om observatør finnes fra før, dersom den ikke gjør det lagres en ny observatør
-                Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør && o.Fornavn == innObservasjon.FornavnObservatør);
+                Observator funnetObservator = await _db.Observatorer.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservator && o.Fornavn == innObservasjon.FornavnObservator);
 
-                if (funnetObservatør == null)
+                if (funnetObservator == null)
                 {
-                    var nyObservatørrad = new Observatør
+                    var nyObservatorrad = new Observator
                     {
-                        Fornavn = innObservasjon.FornavnObservatør,
-                        Etternavn = innObservasjon.EtternavnObservatør,
-                        Telefon = innObservasjon.TelefonObservatør,
-                        Epost = innObservasjon.EpostObservatør,
+                        Fornavn = innObservasjon.FornavnObservator,
+                        Etternavn = innObservasjon.EtternavnObservator,
+                        Telefon = innObservasjon.TelefonObservator,
+                        Epost = innObservasjon.EpostObservator,
                         RegistrerteObservasjoner = new List<EnkeltObservasjon>(),
                         AntallRegistrerteObservasjoner = 0,
                         SisteObservasjon = new DateTime()
                     };
-                    _db.Observatører.Add(nyObservatørrad);
+                    _db.Observatorer.Add(nyObservatorrad);
                     await _db.SaveChangesAsync();
-                    funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør && o.Fornavn == innObservasjon.FornavnObservatør);
+                    funnetObservator = await _db.Observatorer.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservator && o.Fornavn == innObservasjon.FornavnObservator);
 
                 }
 
@@ -76,7 +76,7 @@ namespace UFOAppAngular.DAL
                     KommuneObservert = innObservasjon.KommuneObservert,
                     BeskrivelseAvObservasjon = innObservasjon.BeskrivelseAvObservasjon,
                     ObservertUFO = funnetUFO,
-                    Observatør = funnetObservatør
+                    Observator = funnetObservator
                 };
 
                 _db.EnkeltObservasjoner.Add(nyEnkeltObservasjonRad);
@@ -89,7 +89,7 @@ namespace UFOAppAngular.DAL
 
                 //Til slutt oppdateres UFO og Observatør sine atributter antallObservasjoner og sistObservert
 
-                funnetObservatør.AntallRegistrerteObservasjoner++;
+                funnetObservator.AntallRegistrerteObservasjoner++;
                 funnetUFO.GangerObservert++;
 
                 foreach (EnkeltObservasjon observasjon in funnetUFO.Observasjoner)
@@ -102,13 +102,13 @@ namespace UFOAppAngular.DAL
                     }
                 }
 
-                foreach (EnkeltObservasjon observasjon in funnetObservatør.RegistrerteObservasjoner)
+                foreach (EnkeltObservasjon observasjon in funnetObservator.RegistrerteObservasjoner)
                 {
                    
                     //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > funnetObservatør.SisteObservasjon)
+                    if (observasjon.TidspunktObservert > funnetObservator.SisteObservasjon)
                     {
-                        funnetObservatør.SisteObservasjon = observasjon.TidspunktObservert;
+                        funnetObservator.SisteObservasjon = observasjon.TidspunktObservert;
                     }
                 }
                
@@ -141,8 +141,8 @@ namespace UFOAppAngular.DAL
                         TidspunktObservert = enkeltObservasjon.TidspunktObservert,
                         KommuneObservert = enkeltObservasjon.KommuneObservert,
                         BeskrivelseAvObservasjon = enkeltObservasjon.BeskrivelseAvObservasjon,
-                        FornavnObservatør = enkeltObservasjon.Observatør.Fornavn,
-                        EtternavnObservatør = enkeltObservasjon.Observatør.Etternavn
+                        FornavnObservator = enkeltObservasjon.Observator.Fornavn,
+                        EtternavnObservator = enkeltObservasjon.Observator.Etternavn
                     };
                     alleObservasjoner.Add(enObservasjon);
                 }
@@ -169,10 +169,10 @@ namespace UFOAppAngular.DAL
                     KommuneObservert = enkeltObservasjon.KommuneObservert,
                     BeskrivelseAvObservasjon = enkeltObservasjon.BeskrivelseAvObservasjon,
                     Modell = enkeltObservasjon.ObservertUFO.Modell,
-                    FornavnObservatør = enkeltObservasjon.Observatør.Fornavn,
-                    EtternavnObservatør = enkeltObservasjon.Observatør.Etternavn,
-                    TelefonObservatør = enkeltObservasjon.Observatør.Telefon,
-                    EpostObservatør = enkeltObservasjon.Observatør.Epost
+                    FornavnObservator = enkeltObservasjon.Observator.Fornavn,
+                    EtternavnObservator = enkeltObservasjon.Observator.Etternavn,
+                    TelefonObservator = enkeltObservasjon.Observator.Telefon,
+                    EpostObservator = enkeltObservasjon.Observator.Epost
                 };
                 return enObservasjon;
             }
@@ -232,29 +232,29 @@ namespace UFOAppAngular.DAL
 
         }
 
-        public async Task<List<Observatør>> HentAlleObservatører()
+        public async Task<List<Observator>> HentAlleObservatorer()
         {
             try
             {
-                List<Observatør> alleObservatører = await _db.Observatører.ToListAsync();
+                List<Observator> alleObervatorer = await _db.Observatorer.ToListAsync();
 
-                List<Observatør> returObservatører = new List<Observatør>();
+                List<Observator> returObservatorer = new List<Observator>();
 
-                foreach (var enkeltObservatør in alleObservatører)
+                foreach (var enkeltObservator in alleObervatorer)
                 {
-                    var enObservatør = new Observatør
+                    var enObservator = new Observator
                     {
-                        Id = enkeltObservatør.Id,
-                        Fornavn = enkeltObservatør.Fornavn,
-                        Etternavn = enkeltObservatør.Etternavn,
-                        Telefon = enkeltObservatør.Telefon,
-                        Epost = enkeltObservatør.Epost,
-                        AntallRegistrerteObservasjoner = enkeltObservatør.AntallRegistrerteObservasjoner,
-                        SisteObservasjon = enkeltObservatør.SisteObservasjon
+                        Id = enkeltObservator.Id,
+                        Fornavn = enkeltObservator.Fornavn,
+                        Etternavn = enkeltObservator.Etternavn,
+                        Telefon = enkeltObservator.Telefon,
+                        Epost = enkeltObservator.Epost,
+                        AntallRegistrerteObservasjoner = enkeltObservator.AntallRegistrerteObservasjoner,
+                        SisteObservasjon = enkeltObservator.SisteObservasjon
                     };
-                    returObservatører.Add(enObservatør);
+                    returObservatorer.Add(enObservator);
                 }
-                return returObservatører;
+                return returObservatorer;
             }
             catch (Exception e)
             {
@@ -263,24 +263,24 @@ namespace UFOAppAngular.DAL
             }
         }
 
-        public async Task<Observatør> HentEnObservatør(string fornavn, string etternavn)
+        public async Task<Observator> HentEnObservator(string fornavn, string etternavn)
         {
             try
             {
-                Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == etternavn && o.Fornavn == fornavn);
+                Observator funnetObservator = await _db.Observatorer.FirstOrDefaultAsync(o => o.Etternavn == etternavn && o.Fornavn == fornavn);
 
-                var returObservatør = new Observatør
+                var returObservator = new Observator
                 {
-                    Id = funnetObservatør.Id,
-                    Fornavn = funnetObservatør.Fornavn,
-                    Etternavn = funnetObservatør.Etternavn,
-                    Telefon = funnetObservatør.Telefon,
-                    Epost = funnetObservatør.Epost,
-                    AntallRegistrerteObservasjoner = funnetObservatør.AntallRegistrerteObservasjoner,
-                    SisteObservasjon = funnetObservatør.SisteObservasjon
+                    Id = funnetObservator.Id,
+                    Fornavn = funnetObservator.Fornavn,
+                    Etternavn = funnetObservator.Etternavn,
+                    Telefon = funnetObservator.Telefon,
+                    Epost = funnetObservator.Epost,
+                    AntallRegistrerteObservasjoner = funnetObservator.AntallRegistrerteObservasjoner,
+                    SisteObservasjon = funnetObservator.SisteObservasjon
                 };
 
-                return returObservatør;
+                return returObservator;
             }
             catch (Exception e)
             {

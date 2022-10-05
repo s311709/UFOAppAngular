@@ -13,9 +13,9 @@ namespace UFOAppAngular.Models
         public string KommuneObservert { get; set; }
         public string BeskrivelseAvObservasjon { get; set; }
         public string Modell { get; set; }
-        public string FornavnObservatør { get; set; }
-        public string EtternavnObservatør { get; set; }
-        public string TelefonObservatør { get; set; }
-        public string EpostObservatør { get; set; }
+        public string FornavnObservator { get; set; }
+        public string EtternavnObservator { get; set; }
+        public string TelefonObservator { get; set; }
+        public string EpostObservator { get; set; }
     }
 }

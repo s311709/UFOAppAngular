@@ -26,6 +26,7 @@ namespace UFOAppAngular.Controllers
             _log = log;
         }
 
+        [HttpPost]
         public async Task<bool> LagreObservasjon(Observasjon innObservasjon)
         {
             return await _db.LagreObservasjon(innObservasjon);
@@ -68,22 +69,22 @@ namespace UFOAppAngular.Controllers
             }
             return Ok(UFO);
         }
-        public async Task<ActionResult> HentAlleObservatører()
+        public async Task<ActionResult> HentAlleObservatorer()
         {
-            List<Observatør> Observatører = await _db.HentAlleObservatører();
+            List<Observator> Observatorer = await _db.HentAlleObservatorer();
 
-            return Ok(Observatører);
+            return Ok(Observatorer);
         }
 
-        public async Task<ActionResult> HentEnObservatør(string fornavn, string etternavn)
+        public async Task<ActionResult> HentEnObservator(string fornavn, string etternavn)
         {
-            Observatør observatør = await _db.HentEnObservatør(fornavn, etternavn);
-            if (observatør == null)
+            Observator observator = await _db.HentEnObservator(fornavn, etternavn);
+            if (observator == null)
             {
                 _log.LogInformation("Fant ikke observatøren");
                 return NotFound("Fant ikke observatøren");
             }
-            return Ok(observatør);
+            return Ok(observator);
         }
     }
 }
