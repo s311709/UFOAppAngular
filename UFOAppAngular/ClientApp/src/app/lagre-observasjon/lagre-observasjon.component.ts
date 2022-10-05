@@ -15,7 +15,31 @@ export class LagreObservasjonComponent {
 
     validering = {
         id: [""],
+        kallenavnUFO: [
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+        ],
+        tidspunktObservert: [
+            null
+        ],
+        kommuneObservert: [
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+        ],
+        beskrivelseAvObservasjon: [
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+        ],
+        modell: [
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+        ],
         fornavnObservator: [
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+        ],
+        etternavnObservator: [
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+        ],
+        telefonObservator: [
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+        ],
+        epostObservator: [
             null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ]
     }
@@ -31,8 +55,16 @@ export class LagreObservasjonComponent {
     lagreObservasjon() {
         const lagretObservasjon = new Observasjon();
 
+        lagretObservasjon.kallenavnUFO = this.skjema.value.kallenavnUFO;
+        lagretObservasjon.tidspunktObservert = this.skjema.value.tidspunktObservert;
+        lagretObservasjon.kommuneObservert = this.skjema.value.kommuneObservert;
+        lagretObservasjon.beskrivelseAvObservasjon = this.skjema.value.fornavnObservator;
+        lagretObservasjon.modell = this.skjema.value.fornavnObservator;
         lagretObservasjon.fornavnObservator = this.skjema.value.fornavnObservator;
-        
+        lagretObservasjon.etternavnObservator = this.skjema.value.etternavnObservator;
+        lagretObservasjon.telefonObservator = this.skjema.value.fornavnObservator;
+        lagretObservasjon.epostObservator = this.skjema.value.fornavnObservator;
+
         this.http.post("api/UFO/", lagretObservasjon)
             .subscribe(retur => {
                 this.router.navigate(['/registrerte-observasjoner']);
