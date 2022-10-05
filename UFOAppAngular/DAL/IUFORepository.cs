@@ -19,6 +19,7 @@ namespace UFOAppAngular.DAL
 
         Task<Observator> HentEnObservator(string fornavn, string etternavn);
 
+        Task<bool> SlettObservasjon(int id);
 
 
     }

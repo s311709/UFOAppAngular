@@ -86,5 +86,18 @@ namespace UFOAppAngular.Controllers
             }
             return Ok(observator);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> SlettObservasjon(int id)
+        {
+            
+                bool returOK = await _db.SlettObservasjon(id);
+                if (!returOK)
+                {
+                    _log.LogInformation("Sletting av observasjon ble ikke utført");
+                    return NotFound("Sletting av observasjon ble ikke utført");
+                }
+                return Ok("Observasjon slettet");
+        }
     }
 }
