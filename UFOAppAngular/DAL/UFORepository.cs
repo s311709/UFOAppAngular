@@ -226,17 +226,20 @@ namespace UFOAppAngular.DAL
         {
             try
             {
-                Observator funnetObservator = await _db.Observatorer.FirstOrDefaultAsync(o => o.Etternavn == etternavn && o.Fornavn == fornavn);
+                //Ønsker at den skal returnere en tom observatør dersom den ikke finner noe
+                Observator returObservator = new Observator();
 
-                var returObservator = new Observator
+                Observator funnetObservator = await _db.Observatorer.FirstOrDefaultAsync(o => o.Etternavn == etternavn && o.Fornavn == fornavn);
+                if (funnetObservator != null)
                 {
-                    Id = funnetObservator.Id,
-                    Fornavn = funnetObservator.Fornavn,
-                    Etternavn = funnetObservator.Etternavn,
-                    Telefon = funnetObservator.Telefon,
-                    Epost = funnetObservator.Epost,
-                    AntallRegistrerteObservasjoner = funnetObservator.AntallRegistrerteObservasjoner,
-                    SisteObservasjon = funnetObservator.SisteObservasjon
+
+                    returObservator.Id = funnetObservator.Id;
+                    returObservator.Fornavn = funnetObservator.Fornavn;
+                    returObservator.Etternavn = funnetObservator.Etternavn;
+                    returObservator.Telefon = funnetObservator.Telefon;
+                    returObservator.Epost = funnetObservator.Epost;
+                    returObservator.AntallRegistrerteObservasjoner = funnetObservator.AntallRegistrerteObservasjoner;
+                    returObservator.SisteObservasjon = funnetObservator.SisteObservasjon;
                 };
 
                 return returObservator;
@@ -248,7 +251,6 @@ namespace UFOAppAngular.DAL
             }
 
         }
-
         public async Task<bool> SlettObservasjon(int id)
         {
             try
