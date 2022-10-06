@@ -11,7 +11,6 @@ namespace UFOAppAngular.Controllers
 {
 
     [ApiController]
-    // dekoratøren over må være med; dersom ikke må post og put bruke [FromBody] som deoratør inne i prameterlisten
     [Route("api/[controller]")]
 
     public class UFOController : ControllerBase
