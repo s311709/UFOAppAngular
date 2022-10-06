@@ -106,7 +106,7 @@ namespace UFOAppAngular.Controllers
                     _log.LogInformation("Sletting av observasjon ble ikke utført");
                     return NotFound("Sletting av observasjon ble ikke utført");
                 }
-                return Ok("Observasjon slettet");
+                return Ok();
         }
     }
 }
