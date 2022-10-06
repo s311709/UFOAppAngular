@@ -25,7 +25,6 @@ namespace UFOAppAngular.DAL
         {
             try
             {
-
                 //Sjekkes om observatør finnes fra før
                 Observator funnetObservator = await _db.Observatorer.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservator && o.Fornavn == innObservasjon.FornavnObservator);
 
@@ -47,11 +46,9 @@ namespace UFOAppAngular.DAL
                     await LagreNyUFO(innObservasjon);
                     //Henter ny UFO fra databasen
                     funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == innObservasjon.KallenavnUFO);
-
                 }
 
                 //Deretter lages en ny EnkeltObservasjon med UFOen og Observatøren i attributter inni EnkeltObservasjon
-
                 EnkeltObservasjon nyEnkeltObservasjonRad = new EnkeltObservasjon
                 {
                     TidspunktObservert = innObservasjon.TidspunktObservert,
@@ -63,20 +60,16 @@ namespace UFOAppAngular.DAL
 
                 _db.EnkeltObservasjoner.Add(nyEnkeltObservasjonRad);
 
-                //Så legges EnkeltObservasjon inn i listene til UFO og Observatør
-
-                //SLETT skal dette være kommentert ut?
+                //Enkeltobservasjonen legges til UFO og Observatør
                 funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
-                funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
+                funnetObservator.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
 
                 //Til slutt oppdateres UFO og Observatør sine atributter antallObservasjoner og sistObservert
-
                 funnetObservator.AntallRegistrerteObservasjoner++;
                 funnetUFO.GangerObservert++;
 
                 //Siste observasjon oppdateres
                 await OppdaterSisteObservasjon(funnetUFO, funnetObservator);
-
 
                 await _db.SaveChangesAsync();
 
@@ -276,28 +269,7 @@ namespace UFOAppAngular.DAL
                 enkeltObservasjonObservator.AntallRegistrerteObservasjoner--;
 
                 //Sist observert resettes
-                enkeltObservasjonUFO.SistObservert = new DateTime();
-                enkeltObservasjonObservator.SisteObservasjon = new DateTime();
-
-                foreach (EnkeltObservasjon observasjon in enkeltObservasjonUFO.Observasjoner)
-                {
-
-                    //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > enkeltObservasjonUFO.SistObservert)
-                    {
-                        enkeltObservasjonUFO.SistObservert = observasjon.TidspunktObservert;
-                    }
-                }
-
-                foreach (EnkeltObservasjon observasjon in enkeltObservasjonObservator.RegistrerteObservasjoner)
-                {
-
-                    //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > enkeltObservasjonObservator.SisteObservasjon)
-                    {
-                        enkeltObservasjonObservator.SisteObservasjon = observasjon.TidspunktObservert;
-                    }
-                }
+                await OppdaterSisteObservasjon(enkeltObservasjonUFO, enkeltObservasjonObservator);
 
                 //Enkeltobservasjon fjernes fra databasen
                 _db.EnkeltObservasjoner.Remove(enkeltObservasjon);
@@ -336,28 +308,7 @@ namespace UFOAppAngular.DAL
                 endreObjekt.Observator.Epost = endreObservasjon.EpostObservator;
 
                 //Sist observert resettes
-                endreObjekt.ObservertUFO.SistObservert = new DateTime();
-                endreObjekt.Observator.SisteObservasjon = new DateTime();
-
-                foreach (EnkeltObservasjon observasjon in endreObjekt.ObservertUFO.Observasjoner)
-                {
-
-                    //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > endreObjekt.ObservertUFO.SistObservert)
-                    {
-                        endreObjekt.ObservertUFO.SistObservert = observasjon.TidspunktObservert;
-                    }
-                }
-
-                foreach (EnkeltObservasjon observasjon in endreObjekt.Observator.RegistrerteObservasjoner)
-                {
-
-                    //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > endreObjekt.Observator.SisteObservasjon)
-                    {
-                        endreObjekt.Observator.SisteObservasjon = observasjon.TidspunktObservert;
-                    }
-                }
+                await OppdaterSisteObservasjon(endreObjekt.ObservertUFO, endreObjekt.Observator);
 
                 await _db.SaveChangesAsync();
 
@@ -421,6 +372,9 @@ namespace UFOAppAngular.DAL
         {
             try
             {
+                innUFO.SistObservert = new DateTime();
+                innObservator.SisteObservasjon = new DateTime();
+
                 foreach (EnkeltObservasjon observasjon in innUFO.Observasjoner)
                 {
 
