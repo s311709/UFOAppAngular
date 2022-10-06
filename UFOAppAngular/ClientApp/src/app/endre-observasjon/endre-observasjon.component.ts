@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Observasjon } from "../Observasjon";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-endre-observasjon',
@@ -16,31 +17,31 @@ export class EndreObservasjonComponent implements OnInit {
     validering = {
         id: [""],
         kallenavnUFO: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ],
         tidspunktObservert: [
             null
         ],
         kommuneObservert: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ],
         beskrivelseAvObservasjon: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ],
         modell: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ],
         fornavnObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ],
         etternavnObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ],
         telefonObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ],
         epostObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null
         ]
     }
 
@@ -63,7 +64,7 @@ export class EndreObservasjonComponent implements OnInit {
                 observasjon => {
                     this.skjema.patchValue({ id: observasjon.id });
                     this.skjema.patchValue({ kallenavnUFO: observasjon.kallenavnUFO });
-                    this.skjema.patchValue({ tidspunktObservert: moment(observasjon.tidspunktObservert).format("YYYY-MM-DDTkk:mm:ss")});
+                    this.skjema.patchValue({ tidspunktObservert: observasjon.tidspunktObservert});
                     this.skjema.patchValue({ kommuneObservert: observasjon.kommuneObservert });
                     this.skjema.patchValue({ beskrivelseAvObservasjon: observasjon.beskrivelseAvObservasjon });
                     this.skjema.patchValue({ fornavnObservator: observasjon.fornavnObservator });

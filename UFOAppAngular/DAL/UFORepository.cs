@@ -391,6 +391,9 @@ namespace UFOAppAngular.DAL
                         endreObjekt.Observator.SisteObservasjon = observasjon.TidspunktObservert;
                     }
                 }
+
+                await _db.SaveChangesAsync();
+
             }
             catch
             {
