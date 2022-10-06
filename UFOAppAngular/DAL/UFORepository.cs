@@ -345,5 +345,60 @@ namespace UFOAppAngular.DAL
                 return false;
             }
         }
+
+        //EndreObservasjon
+        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
+        {
+            try
+            {
+                var endreObjekt = await _db.EnkeltObservasjoner.FindAsync(endreObservasjon.Id);
+                
+                //enkeltObservasjon
+                endreObjekt.TidspunktObservert = endreObservasjon.TidspunktObservert;
+                endreObjekt.KommuneObservert = endreObservasjon.KommuneObservert;
+                endreObjekt.BeskrivelseAvObservasjon = endreObservasjon.BeskrivelseAvObservasjon;
+                
+                //UFO
+                endreObjekt.ObservertUFO.Kallenavn = endreObservasjon.KallenavnUFO;
+                endreObjekt.ObservertUFO.Modell = endreObservasjon.Modell;
+                
+                //Observatør
+                endreObjekt.Observator.Fornavn = endreObservasjon.FornavnObservator;
+                endreObjekt.Observator.Etternavn = endreObservasjon.EtternavnObservator;
+                endreObjekt.Observator.Telefon = endreObservasjon.TelefonObservator;
+                endreObjekt.Observator.Epost = endreObservasjon.EpostObservator;
+
+                //Sist observert resettes
+                endreObjekt.ObservertUFO.SistObservert = new DateTime();
+                endreObjekt.Observator.SisteObservasjon = new DateTime();
+
+                foreach (EnkeltObservasjon observasjon in endreObjekt.ObservertUFO.Observasjoner)
+                {
+
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > endreObjekt.ObservertUFO.SistObservert)
+                    {
+                        endreObjekt.ObservertUFO.SistObservert = observasjon.TidspunktObservert;
+                    }
+                }
+
+                foreach (EnkeltObservasjon observasjon in endreObjekt.Observator.RegistrerteObservasjoner)
+                {
+
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > endreObjekt.Observator.SisteObservasjon)
+                    {
+                        endreObjekt.Observator.SisteObservasjon = observasjon.TidspunktObservert;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        
     }
 }

@@ -13,7 +13,7 @@ const appRoots: Routes = [
     { path: 'lagre-observasjon', component: LagreObservasjonComponent },
     { path: 'nav-meny', component: NavMenyComponent },
     { path: 'logg-inn', component: LoggInnComponent },
-    { path: 'endre-observasjon', component: EndreObservasjonComponent },
+    { path: 'endre-observasjon/:id', component: EndreObservasjonComponent },
     //Default eller localhost
     { path: '', redirectTo: 'logg-inn', pathMatch: 'full' }
     ]

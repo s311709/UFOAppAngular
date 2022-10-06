@@ -26,8 +26,7 @@
                         <td>{{observasjon.fornavnObservator}} {{observasjon.etternavnObservator}}</td>
 
                         <td><button class="btn btn-danger" (click)="slettObservasjon(observasjon.id)">Slett</button></td>
-                        <td><button class="btn btn-success" routerLink="/endre-observasjon">Endre</button></td>
-                        <!-- Denne knappen over gjør ingenting, må bindes til ID, se på koden til Tor evt video-->
+                        <td><button class="btn btn-success" [routerLink]="['/endre-observasjon',observasjon.id]">Endre</button></td>
                     </tr>
                 </tbody>
             </table>

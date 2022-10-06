@@ -107,5 +107,18 @@ namespace UFOAppAngular.Controllers
                 }
                 return Ok();
         }
+        [Route("EndreObservasjon/")]
+        [HttpPut]
+        public async Task<ActionResult> EndreObservasjon(Observasjon endreObservasjon)
+        {
+            bool returOK = await _db.EndreObservasjon(endreObservasjon);
+            if (!returOK)
+            {
+                _log.LogInformation("Endringen kunne ikke utføres");
+                return NotFound();
+            }
+            return Ok();
+        }
+
     }
 }

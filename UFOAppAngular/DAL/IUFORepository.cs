@@ -15,12 +15,14 @@ namespace UFOAppAngular.DAL
         Task<List<UFO>> HentAlleUFOer();
 
         Task<UFO> HentEnUFO(string kallenavn);
+
         Task<List<Observator>> HentAlleObservatorer();
 
         Task<Observator> HentEnObservator(string fornavn, string etternavn);
 
         Task<bool> SlettObservasjon(int id);
 
+        Task<bool> EndreObservasjon(Observasjon endreObservasjon);
 
     }
 
