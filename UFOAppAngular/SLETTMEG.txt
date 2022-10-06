@@ -1,0 +1,10 @@
+﻿MANGLER
+
+Oversikt over alle UFOer 
+Ovsersikt over alle Observatører
+Logg-inn funksjonalitet
+Feilhåndtering
+
+Inputvalidering i alle ledd
+Testing
+Front-end
