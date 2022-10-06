@@ -32,6 +32,7 @@ namespace UFOAppAngular.Controllers
             return await _db.LagreObservasjon(innObservasjon);
         }
 
+        [Route("HentAlleObservasjoner")]
         [HttpGet]
         public async Task<ActionResult> HentAlleObservasjoner()
         {
@@ -40,6 +41,9 @@ namespace UFOAppAngular.Controllers
             return Ok(Observasjoner);
 
         }
+
+        [Route("HentEnObservasjon/{id?}")]
+        [HttpGet]
         public async Task<ActionResult> HentEnObservasjon(int id)
         {
             Observasjon observasjonen = await _db.HentEnObservasjon(id);
@@ -59,6 +63,9 @@ namespace UFOAppAngular.Controllers
             return Ok(UFOer);
 
         }
+        
+        [Route("HentEnUFO/{kallenavn?}")]
+        [HttpGet]
         public async Task<ActionResult> HentEnUFO(string kallenavn)
         {
             UFO UFO = await _db.HentEnUFO(kallenavn);
@@ -69,6 +76,7 @@ namespace UFOAppAngular.Controllers
             }
             return Ok(UFO);
         }
+
         public async Task<ActionResult> HentAlleObservatorer()
         {
             List<Observator> Observatorer = await _db.HentAlleObservatorer();

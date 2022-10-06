@@ -13,6 +13,8 @@ export class RegistrerteObservasjonerComponent {
 
     public alleObservasjoner: Array<Observasjon>;
     public laster: boolean;
+    observasjonTilSletting: string;
+    slettingOK: boolean;
 
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,8 +24,7 @@ export class RegistrerteObservasjonerComponent {
     }
 
     hentAlleObservasjoner() {
-        //arrayet skal returnere et observasjonsarray
-        this.http.get<Observasjon[]>("api/UFO/")
+        this.http.get<Observasjon[]>("api/UFO/HentAlleObservasjoner")
             .subscribe(observasjonene => {
                 this.alleObservasjoner = observasjonene;
                 this.laster = false;
@@ -31,5 +32,25 @@ export class RegistrerteObservasjonerComponent {
                 error => console.log(error)
             );
     };
+
+    //Denne henter kallenavn og tidspunkt på observasjon som skal slettes
+    slettObservasjon (id: number) {
+
+        // henter kallenavn og dato på UFO observert
+        this.http.get<Observasjon>("api/UFO/HentEnObservasjon/" + id)
+            .subscribe(observasjon => {
+                this.observasjonTilSletting = observasjon.kallenavnUFO + " " + observasjon.tidspunktObservert;
+
+                // viser modalen og kaller til slett
+                this.visModalOgSlett(id);
+            },
+                error => console.log(error)
+            );
+    }
+
+    visModalOgSlett(id: number) {
+
+        
+    }
 
 }
