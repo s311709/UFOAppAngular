@@ -95,7 +95,8 @@ namespace UFOAppAngular.Controllers
             return Ok(observator);
         }
 
-        [HttpDelete("{id}")]
+        [Route("SlettObservasjon/{id?}")]
+        [HttpDelete]
         public async Task<ActionResult> SlettObservasjon(int id)
         {
             

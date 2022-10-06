@@ -1,4 +1,8 @@
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Modal } from './sletteModal';
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observasjon } from "../Observasjon";
@@ -13,10 +17,12 @@ export class RegistrerteObservasjonerComponent {
 
     public alleObservasjoner: Array<Observasjon>;
     public laster: boolean;
-    observasjonTilSletting: string;
+    UFOTilSletting: string;
+    DatoTilSletting: Date;
+
     slettingOK: boolean;
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }
 
     ngOnInit() {
         this.laster = true;
@@ -39,7 +45,8 @@ export class RegistrerteObservasjonerComponent {
         // henter kallenavn og dato på UFO observert
         this.http.get<Observasjon>("api/UFO/HentEnObservasjon/" + id)
             .subscribe(observasjon => {
-                this.observasjonTilSletting = observasjon.kallenavnUFO + " " + observasjon.tidspunktObservert;
+                this.UFOTilSletting = observasjon.kallenavnUFO;
+                this.DatoTilSletting = observasjon.tidspunktObservert;
 
                 // viser modalen og kaller til slett
                 this.visModalOgSlett(id);
@@ -49,8 +56,25 @@ export class RegistrerteObservasjonerComponent {
     }
 
     visModalOgSlett(id: number) {
+        const modalRef = this.modalService.open(Modal);
 
-        
+        modalRef.componentInstance.kallenavnUFO = this.UFOTilSletting;
+        modalRef.componentInstance.tidspunktObservert = this.DatoTilSletting;
+
+        modalRef.result.then(retur => {
+            console.log('Lukket med:' + retur);
+            if (retur == "Slett") {
+
+                // kall til server for sletting
+                this.http.delete("api/UFO/SlettObservasjon/" + id)
+                    .subscribe(retur => {
+                        this.hentAlleObservasjoner();
+                    },
+                        error => console.log(error)
+                    );
+            }
+            this.router.navigate(['/registrerte-observasjoner']);
+        });
     }
 
 }
