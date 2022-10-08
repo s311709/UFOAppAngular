@@ -65,7 +65,7 @@ export class LagreObservasjonComponent {
         lagretObservasjon.telefonObservator = this.skjema.value.fornavnObservator;
         lagretObservasjon.epostObservator = this.skjema.value.fornavnObservator;
 
-        this.http.post("api/UFO/", lagretObservasjon)
+        this.http.post("api/UFO/LagreObservasjon", lagretObservasjon)
             .subscribe(retur => {
                 this.router.navigate(['/registrerte-observasjoner']);
             },

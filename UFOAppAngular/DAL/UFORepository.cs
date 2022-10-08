@@ -76,8 +76,9 @@ namespace UFOAppAngular.DAL
                 return true;
 
             }
-            catch
+            catch (Exception e)
             {
+                _log.LogInformation(e.Message);
                 return false;
             }
         }
@@ -142,28 +143,34 @@ namespace UFOAppAngular.DAL
             }
 
         }
-
-
         public async Task<List<UFO>> HentAlleUFOer()
         {
-            List<UFO> alleUFOer = await _db.UFOer.ToListAsync();
-
-            List<UFO> returUFOer = new List<UFO>();
-
-            foreach (var UFO in alleUFOer)
+            try
             {
-                var returUFO = new UFO
-                {
-                    Id = UFO.Id,
-                    Kallenavn = UFO.Kallenavn,
-                    Modell = UFO.Modell,
-                    SistObservert = UFO.SistObservert,
-                    GangerObservert = UFO.GangerObservert
-                };
-                returUFOer.Add(returUFO);
-            }
+                List<UFO> alleUFOer = await _db.UFOer.ToListAsync();
 
-            return returUFOer;
+                List<UFO> returUFOer = new List<UFO>();
+
+                foreach (var UFO in alleUFOer)
+                {
+                    var returUFO = new UFO
+                    {
+                        Id = UFO.Id,
+                        Kallenavn = UFO.Kallenavn,
+                        Modell = UFO.Modell,
+                        SistObservert = UFO.SistObservert,
+                        GangerObservert = UFO.GangerObservert
+                    };
+                    returUFOer.Add(returUFO);
+                }
+
+                return returUFOer;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return null;
+            }
         }
 
         public async Task<UFO> HentEnUFO(string kallenavn)
@@ -287,7 +294,6 @@ namespace UFOAppAngular.DAL
             }
         }
 
-        //EndreObservasjon
         public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
         {
             try
@@ -315,13 +321,13 @@ namespace UFOAppAngular.DAL
                 await _db.SaveChangesAsync();
 
             }
-            catch
+            catch (Exception e)
             {
+                _log.LogInformation(e.Message);
                 return false;
             }
             return true;
         }
-
         public async Task<bool> LagreNyUFO(Observasjon innObservasjon)
         {
             try

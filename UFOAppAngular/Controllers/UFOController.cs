@@ -25,10 +25,17 @@ namespace UFOAppAngular.Controllers
             _log = log;
         }
 
+        [Route("LagreObservasjon")]
         [HttpPost]
-        public async Task<bool> LagreObservasjon(Observasjon innObservasjon)
+        public async Task<ActionResult> LagreObservasjon(Observasjon innObservasjon)
         {
-            return await _db.LagreObservasjon(innObservasjon);
+            bool returOK = await _db.LagreObservasjon(innObservasjon);
+            if (!returOK)
+            {
+                _log.LogInformation("Observasjonen kunne ikke lagres!");
+                return BadRequest("Observasjonen kunne ikke lagres");
+            }
+            return Ok("");
         }
 
         [Route("HentAlleObservasjoner")]
@@ -37,7 +44,7 @@ namespace UFOAppAngular.Controllers
         {
             List<Observasjon> Observasjoner = await _db.HentAlleObservasjoner();
 
-            return Ok(Observasjoner);
+            return Ok(Observasjoner); //Returnerer tomt array hvis databasen er tom
 
         }
 
@@ -46,12 +53,8 @@ namespace UFOAppAngular.Controllers
         public async Task<ActionResult> HentEnObservasjon(int id)
         {
             Observasjon observasjonen = await _db.HentEnObservasjon(id);
-            if (observasjonen == null)
-            {
-                _log.LogInformation("Fant ikke observasjonen");
-                return NotFound("Fant ikke observasjonen");
-            }
-            return Ok(observasjonen);
+            
+            return Ok(observasjonen); //Denne returnerer alltid OK, returnerer en tom observasjon dersom den ikke blir funnet
         }
 
 
