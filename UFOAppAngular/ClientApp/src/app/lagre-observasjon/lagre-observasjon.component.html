@@ -1,73 +1,113 @@
-<div class="container">
-    <h2>Registrer ny observasjon</h2>
-    <div class="col-md-4">
-        <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
-            <div class="form-group">
-                <label>Navn UFO</label>
-                <input class="form-control" formControlName="kallenavnUFO" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.kallenavnUFO.valid || (skjema.controls.kallenavnUFO.pristine && !submitted)">
-                    UFO-navn er utenfor kravet om 2-30 bokstaver.
-                </p>
+    <!-- skjema -->
+    <div class="container">
+        <form class="card d-flex  col-lg-8 col-md-12">
+            <div class="header mb-5">
+                <h1>Innmelding av observasjon</h1>
             </div>
-            <div class="form-group">
-                <label>Tidspunkt for observasjon</label>
-                <input type="datetime-local" class="form-control" formControlName="tidspunktObservert" />
-                <span class="alert alert-warning" [hidden]="skjema.controls.tidspunktObservert.valid || (skjema.controls.tidspunktObservert.pristine && !submitted)">
-                </span>
-            </div>
-            <div class="form-group">
-                <label>Kommune hvor UFOen ble observert</label>
-                <input class="form-control" formControlName="kommuneObservert" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.kommuneObservert.valid || (skjema.controls.kommuneObservert.pristine && !submitted)">
-                    Kommune er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
-                <label>Beskrivelse av observasjonen</label>
-                <input class="form-control" formControlName="beskrivelseAvObservasjon" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.beskrivelseAvObservasjon.valid || (skjema.controls.beskrivelseAvObservasjon.pristine && !submitted)">
-                    Beskrivelsen er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
-                <label>UFO-modell</label>
-                <input class="form-control" formControlName="modell" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.modell.valid || (skjema.controls.modell.pristine && !submitted)">
-                    Modell er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
-                <label>Fornavn observator</label>
-                <input class="form-control" formControlName="fornavnObservator" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.fornavnObservator.valid || (skjema.controls.fornavnObservator.pristine && !submitted)">
-                    Fornavn er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
-                <label>Etternavn observator</label>
-                <input class="form-control" formControlName="etternavnObservator" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.etternavnObservator.valid || (skjema.controls.etternavnObservator.pristine && !submitted)">
-                    Etternavn er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
-                <label>Telefon observator</label>
-                <input class="form-control" formControlName="telefonObservator" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.telefonObservator.valid || (skjema.controls.telefonObservator.pristine && !submitted)">
-                    Telefonnummer er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
-                <label>E-post observator</label>
-                <input class="form-control" formControlName="epostObservator" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.epostObservator.valid || (skjema.controls.epostObservator.pristine && !submitted)">
-                    E-post er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
-                <button type="submit" [disabled]="!skjema.valid" class="btn btn-primary">Registrer</button>
-            </div>
-        </form>
-    </div>
-</div>
 
+            <div class="row">
+                <div class="col-4">
+                    <h2> Informasjon om observatør </h2>
+                </div>
+
+                <div class="col-8">
+                    <div class="form-floating mb-3">
+                        <!-- har brukt floating for text placeholders inni elementet, men placeholder er backup om browser ikke klarer å laste Bootstrap-skjemaet-->
+                        <input type="text" placeholder="Nils" class="form-control" formControlName="fornavnObservator">
+                        <label for="fornavn">Fornavn</label>
+                        <p class="alert alert-warning" [hidden]="skjema.controls.fornavnObservator.valid || (skjema.controls.fornavnObservator.pristine && !submitted)">
+                            Fornavn er utenfor kravet om 2-30 bokstaver.
+                        </p>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" placeholder="Hansson" class="form-control" formControlName="etternavnObservator">
+                        <label for="etternavn">Etternavn</label>
+                        <p class="alert alert-warning" [hidden]="skjema.controls.etternavnObservator.valid || (skjema.controls.etternavnObservator.pristine && !submitted)">
+                            Etternavn er utenfor kravet om 2-30 bokstaver.
+                        </p>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" placeholder="80080800" class="form-control" formControlName="telefonObservator">
+                        <label for="telefon">Telefonnummer</label>
+                        <p class="alert alert-warning" [hidden]="skjema.controls.telefonObservator.valid || (skjema.controls.telefonObservator.pristine && !submitted)">
+                            Telefonnummer er utenfor kravet om 2-30 bokstaver.
+                        </p>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" formControlName="epostObservator" placeholder="nils.hansson@gmail.com" class="form-control">
+                        <label for="epost">Epost</label>
+                        <p class="alert alert-warning" [hidden]="skjema.controls.epostObservator.valid || (skjema.controls.epostObservator.pristine && !submitted)">
+                            E-post er utenfor kravet om 2-30 bokstaver.
+                        </p>
+                    </div>
+                </div>
+            </div> <!-- observatørRow-->
+
+            <hr class="my-2" />
+
+
+            <div class="row">
+                <div class="col-4 text-left align-content-start">
+                    <h2> Om UFOen  </h2>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group mb-3">
+                        <label for="fname">Hvilken UFO så du?</label>
+                        <select class="form-control" id="inputform">
+                            <!-- her kommer alle registrerte UFOer i databasen!-->
+                            <option hidden>velg en UFO</option>
+                            <option value="0">ikke på listen</option>
+                        </select>
+                    </div>
+
+
+                    <!-- kallenavn er UFOnavn-->
+                    <div class="form-floating mb-4">
+                        <input type="text" id="UFOnavn" placeholder="UFOnavn" class="form-control" formControlName="kallenavnUFO">
+                        <label for="UFOnavn">Navn på UFO</label>
+                        <div> feks "RomsdalsUFO-en"</div>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="text" id="modell" placeholder="Modell" class="form-control" formControlName="modell">
+                        <label for="modell">Modell</label>
+                        <div> feks "Flygende tallerken"</div>
+                    </div>
+
+                </div>
+            </div> <!-- om UFOen row-->
+
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <!-- date and time input-->
+                    <label for="date" class="col-form-label">Tidspunkt</label>
+                    <div class="input-group date form-floating" id="datepicker">
+                        <input type="datetime-local" class="form-control" id="dato" placeholder="date" formControlName="tidspunktObservert" />
+                        <span class="input-group-append">
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="col-12 mb-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" id="kommune" placeholder="kommune" class="form-control" formControlName="kommuneObservert">
+                        <label for="kommune">Kommune</label>
+                    </div>
+                </div>
+            </div> <!-- row-->
+
+            <div class="form-group mb-3 col-12">
+                <label for="beskrivelse">Beskrivelse av observasjonen</label>
+                <textarea id="beskrivelse" rows="3" class="form-control" formControlName="beskrivelseAvObservasjon"></textarea>
+            </div>
+            <div id="feil"></div>
+
+        </form>
+        <button type="button" class="btn btn-primary" onclick="lagreObservasjon()">Send inn</button>
+    </div>
+
+</body>
+</html>
