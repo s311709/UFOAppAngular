@@ -1,10 +1,29 @@
 ﻿MANGLER
 
-Oversikt over alle UFOer 
-Ovsersikt over alle Observatører
+Features i lagre og endreskjema
 Logg-inn funksjonalitet
 Feilhåndtering
-
+Fikse æøå
 Inputvalidering i alle ledd
 Testing
-Front-end
+
+
+FEATURES I LAGRE- OG ENDRESKJEMA
+Har slitt litt med å finne ut hvordan man kan implementere featursene vi har i lagre- og 
+endreskjemaene i oppgave 1.
+Hvordan implementere en dropdown?
+Hvordan hente data inn i dropdown?
+
+Hvordan søke etter fornavn og etternavn?
+
+https://stackoverflow.com/questions/65853465/how-do-i-get-data-from-database-to-a-drop-down-list-in-angular
+
+Rekker kanskje å gjøre:
+logg-inn med en admin-bruker
+fikse æøå
+inputvalidering
+feilhåndtering?
+
+Rekker nok ikke å skrive tester
+får ikke til skjemaene alene tror jeg
+Rekker nok ikke å finne ut av hvordan man kan ha personlige brukere i tillegg til admin-bruker
