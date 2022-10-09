@@ -5,6 +5,8 @@ import { NavMenyComponent } from './nav-meny/nav-meny.component';
 import { LoggInnComponent } from './logg-inn/logg-inn.component';
 import { LagreObservasjonComponent } from './lagre-observasjon/lagre-observasjon.component';
 import { EndreObservasjonComponent } from './endre-observasjon/endre-observasjon.component';
+import { UfoOversiktComponent } from './ufo-oversikt/ufo-oversikt.component';
+import { ObservatorOversiktComponent } from './observator-oversikt/observator-oversikt.component';
 
 
 //Deklarer appRoot med paths
@@ -14,6 +16,8 @@ const appRoots: Routes = [
     { path: 'nav-meny', component: NavMenyComponent },
     { path: 'logg-inn', component: LoggInnComponent },
     { path: 'endre-observasjon/:id', component: EndreObservasjonComponent },
+    { path: 'ufo-oversikt', component: UfoOversiktComponent },
+    { path: 'observator-oversikt', component: ObservatorOversiktComponent },
     //Default eller localhost
     { path: '', redirectTo: 'logg-inn', pathMatch: 'full' }
     ]

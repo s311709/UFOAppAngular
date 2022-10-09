@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Registrerte observatorer</h2>
+    <div>
+        <div class="col-md-12">
+            <div *ngIf="laster">Laster observasjoner.....</div>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fornavn</th>
+                        <th>Etternavn</th>
+                        <th>Telefon</th>
+                        <th>Epost</th>
+                        <th>Antall observasjoner</th>
+                        <th>Siste observasjon</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let observator of alleObservatorer">
+                    <tr>
+                        <td>{{observator.id}}</td>
+                        <td>{{observator.fornavn}}</td>
+                        <td>{{observator.etternavn}}</td>
+                        <td>{{observator.telefon}}</td>
+                        <td>{{observator.epost}}</td>
+                        <td>{{observator.antallRegistrerteObservasjoner}}</td>
+                        <td>{{observator.sisteObservasjon}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

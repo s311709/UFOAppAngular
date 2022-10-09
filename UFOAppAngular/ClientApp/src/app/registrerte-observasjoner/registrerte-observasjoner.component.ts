@@ -19,7 +19,6 @@ export class RegistrerteObservasjonerComponent {
     public laster: boolean;
     UFOTilSletting: string;
     DatoTilSletting: Date;
-
     slettingOK: boolean;
 
     constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }

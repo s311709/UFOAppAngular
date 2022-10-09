@@ -14,6 +14,8 @@ import { LoggInnComponent } from './logg-inn/logg-inn.component';
 import { LagreObservasjonComponent } from './lagre-observasjon/lagre-observasjon.component';
 import { EndreObservasjonComponent } from './endre-observasjon/endre-observasjon.component';
 import { Modal } from './registrerte-observasjoner/sletteModal';
+import { UfoOversiktComponent } from './ufo-oversikt/ufo-oversikt.component';
+import { ObservatorOversiktComponent } from './observator-oversikt/observator-oversikt.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { Modal } from './registrerte-observasjoner/sletteModal';
         LoggInnComponent,
         LagreObservasjonComponent,
         EndreObservasjonComponent,
-        Modal
+        Modal,
+        UfoOversiktComponent,
+        ObservatorOversiktComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

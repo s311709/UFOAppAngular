@@ -57,7 +57,7 @@ namespace UFOAppAngular.Controllers
             return Ok(observasjonen); //Denne returnerer alltid OK, returnerer en tom observasjon dersom den ikke blir funnet
         }
 
-
+        [Route("HentAlleUFOer")]
         public async Task<ActionResult> HentAlleUFOer()
         {
             List<UFO> UFOer = await _db.HentAlleUFOer();
@@ -79,7 +79,8 @@ namespace UFOAppAngular.Controllers
             return Ok(UFO);
         }
 
-        public async Task<ActionResult> HentAlleObservatorer()
+        [Route("HentAlleObservatorer")]
+                public async Task<ActionResult> HentAlleObservatorer()
         {
             List<Observator> Observatorer = await _db.HentAlleObservatorer();
 
