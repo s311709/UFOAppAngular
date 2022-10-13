@@ -136,10 +136,23 @@ namespace UFOAppAngular.DAL
                         observator3.SisteObservasjon = observasjon.TidspunktObservert;
                     }
                 }
+
+
+                // lager en påoggingsbruker
+                var bruker = new Brukere();
+                bruker.Brukernavn = "Admin";
+                string passord = "Test11";
+                byte[] salt = UFORepository.LagSalt();
+                byte[] hash = UFORepository.LagHash(passord, salt);
+                bruker.Passord = hash;
+                bruker.Salt = salt;
+                context.Brukere.Add(bruker);
+
                 context.Add(observasjon1);
                 context.Add(observasjon2);
                 context.Add(observasjon3);
                 context.Add(observasjon4);
+
 
                 context.SaveChanges();
 

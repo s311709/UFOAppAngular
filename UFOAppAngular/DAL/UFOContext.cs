@@ -49,7 +49,7 @@ namespace UFOAppAngular.DAL
 
     }
 
-    public class Bruker
+    public class Brukere
     {
         public int Id { get; set; }
         public string Brukernavn { get; set; }
