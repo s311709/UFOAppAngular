@@ -49,6 +49,15 @@ namespace UFOAppAngular.DAL
 
     }
 
+    public class Bruker
+    {
+        public int Id { get; set; }
+        public string Brukernavn { get; set; }
+        public byte[] Passord { get; set; }
+        public byte[] Salt { get; set; }
+    }
+
+
     public class UFOContext : DbContext
     {
         //oppretter databasen
@@ -61,7 +70,8 @@ namespace UFOAppAngular.DAL
         public DbSet<UFO> UFOer { get; set; }
         public DbSet<EnkeltObservasjon> EnkeltObservasjoner { get; set; }
         public DbSet<Observator> Observatorer { get; set; }
-        
+        public DbSet<Brukere> Brukere { get; set; }
+
         //Denne gjør det mulig å bruke lazy loading til atributtene som er virtual
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
