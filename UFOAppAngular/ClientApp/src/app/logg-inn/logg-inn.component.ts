@@ -45,7 +45,8 @@ export class LoggInnComponent {
                     this.router.navigate(['/observator-oversikt']);
                 } else if (retur == false) {
                     console.log("Feil brukernavn eller passord");
-                    //send denne til front-end
+                    let feil = document.getElementById("feil") as HTMLDivElement;
+                    feil.innerHTML = "Feil brukernavn eller passord";
                 }
             },
                 error => console.log(error)
