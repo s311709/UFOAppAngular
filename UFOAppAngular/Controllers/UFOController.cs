@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace UFOAppAngular.Controllers
 {
@@ -18,7 +19,8 @@ namespace UFOAppAngular.Controllers
         private readonly IUFORepository _db;
         private ILogger<UFOController> _log;
 
-
+        private string _ikkeLoggetInn = "";
+        private const string _loggetInn = "loggetInn";
         public UFOController(IUFORepository db, ILogger<UFOController> log)
         {
             _db = db;
@@ -124,5 +126,27 @@ namespace UFOAppAngular.Controllers
             return Ok();
         }
 
+        public async Task<ActionResult> LoggInn(Bruker bruker)
+        {
+            if (ModelState.IsValid)
+            {
+                bool returnOK = await _db.LoggInn(bruker);
+                if (!returnOK)
+                {
+                    _log.LogInformation("Innloggingen feilet for bruker");
+                    HttpContext.Session.SetString(_loggetInn, _ikkeLoggetInn);
+                    return Ok(false);
+                }
+                HttpContext.Session.SetString(_loggetInn, _loggetInn);
+                return Ok(true);
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest("Feil i inputvalidering på server");
+        }
+
+        public void LoggUt()
+        {
+            HttpContext.Session.SetString(_loggetInn, "");
+        }
     }
 }

@@ -24,6 +24,8 @@ namespace UFOAppAngular.DAL
 
         Task<bool> EndreObservasjon(Observasjon endreObservasjon);
 
+        Task<bool> LoggInn(Bruker bruker);
+
     }
 
 }
