@@ -137,7 +137,6 @@ namespace UFOAppAngular.DAL
                     }
                 }
 
-
                 // lager en påoggingsbruker
                 var bruker = new Brukere();
                 bruker.Brukernavn = "Admin";

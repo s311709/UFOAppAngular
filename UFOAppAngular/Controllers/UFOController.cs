@@ -126,6 +126,7 @@ namespace UFOAppAngular.Controllers
             return Ok();
         }
 
+        [Route("LoggInn")]
         public async Task<ActionResult> LoggInn(Bruker bruker)
         {
             if (ModelState.IsValid)

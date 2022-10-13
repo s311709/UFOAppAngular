@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Bruker } from "../Observasjon";
   templateUrl: './logg-inn.component.html',
   styleUrls: ['./logg-inn.component.css']
 })
-export class LoggInnComponent implements OnInit {
+export class LoggInnComponent {
     skjema: FormGroup;
 
     //validering
@@ -37,7 +37,7 @@ export class LoggInnComponent implements OnInit {
         bruker.brukernavn = this.skjema.value.brukernavn;
         bruker.passord = this.skjema.value.passord;
 
-        this.http.post("api/UFO/loggInn", bruker)
+        this.http.post("api/UFO/LoggInn", bruker)
             .subscribe(retur => {
                 this.router.navigate(['/observator-oversikt']);
             },
