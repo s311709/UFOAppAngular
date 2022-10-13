@@ -439,11 +439,14 @@ namespace UFOAppAngular.DAL
             {
                 Brukere funnetBruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Brukernavn == bruker.Brukernavn);
                 // sjekk passordet
-                byte[] hash = LagHash(bruker.Passord, funnetBruker.Salt);
-                bool ok = hash.SequenceEqual(funnetBruker.Passord);
-                if (ok)
+                if (funnetBruker != null)
                 {
-                    return true;
+                    byte[] hash = LagHash(bruker.Passord, funnetBruker.Salt);
+                    bool ok = hash.SequenceEqual(funnetBruker.Passord);
+                    if (ok)
+                    {
+                        return true;
+                    }
                 }
                 return false;
             }

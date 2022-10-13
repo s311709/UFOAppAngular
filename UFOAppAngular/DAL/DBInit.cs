@@ -139,8 +139,8 @@ namespace UFOAppAngular.DAL
 
                 // lager en påoggingsbruker
                 var bruker = new Brukere();
-                bruker.Brukernavn = "Admin";
-                string passord = "Test11";
+                bruker.Brukernavn = "admin";
+                string passord = "test";
                 byte[] salt = UFORepository.LagSalt();
                 byte[] hash = UFORepository.LagHash(passord, salt);
                 bruker.Passord = hash;

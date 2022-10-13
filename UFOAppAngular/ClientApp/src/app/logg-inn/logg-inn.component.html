@@ -1,1 +1,25 @@
-<p>logg-inn works!</p>
+<div class="container">
+    <h2>Logg inn</h2>
+    <div class="col-md-4">
+        <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
+            <div class="form-group">
+                <label>Brukernavn</label>
+                <input class="form-control" formControlName="brukernavn" />
+                <p class="alert alert-warning" [hidden]="skjema.controls.brukernavn.valid || (skjema.controls.brukernavn.pristine && !submitted)">
+                    Brukernavn er utenfor kravet om 2-30 bokstaver.
+                </p>
+            </div>
+            <div class="form-group">
+                <label>Passord</label>
+                <input class="form-control" formControlName="passord" />
+                <p class="alert alert-warning" [hidden]="skjema.controls.passord.valid || (skjema.controls.passord.pristine && !submitted)">
+                    Passord er utenfor kravet om 2-30 bokstaver.
+                </p>
+            </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="!skjema.valid" class="btn btn-primary">Logg inn</button>
+            </div>
+        </form>
+    </div>
+</div>
+

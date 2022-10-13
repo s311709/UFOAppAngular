@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 
 import { Bruker } from "../Observasjon";
 
+//Denne brukes for å lese http-respons
+
+
 @Component({
   selector: 'app-logg-inn',
   templateUrl: './logg-inn.component.html',
@@ -16,10 +19,9 @@ export class LoggInnComponent {
     //validering
     validering = {
         brukernavn: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         passord: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+
         ]
     }
 
@@ -37,12 +39,16 @@ export class LoggInnComponent {
         bruker.brukernavn = this.skjema.value.brukernavn;
         bruker.passord = this.skjema.value.passord;
 
-        this.http.post("api/UFO/LoggInn", bruker)
+        this.http.post<any>("api/UFO/LoggInn", bruker)
             .subscribe(retur => {
-                this.router.navigate(['/observator-oversikt']);
+                if (retur == true) {
+                    this.router.navigate(['/observator-oversikt']);
+                } else if (retur == false) {
+                    console.log("Feil brukernavn eller passord");
+                    //send denne til front-end
+                }
             },
                 error => console.log(error)
-                //SLETT: her må det være litt mer tilbakemelding til brukeren om feil brukernavn/passord
             );
     }
 
