@@ -29,4 +29,8 @@ export class Observator {
     sisteObservasjon: Date;
 }
 
+export class Bruker {
+    brukernavn: string;
+    passord: string;
+}
 
