@@ -182,10 +182,21 @@ namespace UFOAppAngular.Controllers
         }
 
         [Route("LoggUt")]
-        [HttpPost]
-        public void LoggUt()
+        [HttpGet]
+        public ActionResult LoggUt()
         {
-            HttpContext.Session.SetString(_loggetInn, "");
+            string loggetInn = HttpContext.Session.GetString("_loggetInn");
+
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Ok(false);
+            }
+            else 
+            {
+                HttpContext.Session.SetString(_loggetInn, "");
+                return Ok(true);
+            }
+
         }
 
         

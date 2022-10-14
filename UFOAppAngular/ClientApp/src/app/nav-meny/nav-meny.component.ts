@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-meny',
@@ -13,6 +14,21 @@ export class NavMenyComponent implements OnInit {
     ngOnInit(){
     }
 
-    constructor() { }
+    constructor(private http: HttpClient, private router: Router) { }
+
+    loggUt() {
+        this.http.get<any>("api/UFO/LoggUt")
+            .subscribe(retur => {
+                if (retur == true) {
+                    console.log("Du har blitt logget ut.")
+                    this.router.navigate(['/logg-inn']);
+                }
+                else {
+                    console.log("Du er allerede logget ut.")
+                }
+            },
+                error => console.log(error)
+            );
+    };
 
 }
