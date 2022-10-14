@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+ï»¿import { HttpClient } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Modal } from './sletteModal';
 
@@ -38,10 +38,10 @@ export class RegistrerteObservasjonerComponent {
             );
     };
 
-    //Denne henter kallenavn og tidspunkt på observasjon som skal slettes
+    //Denne henter kallenavn og tidspunkt pÃ¥ observasjon som skal slettes
     slettObservasjon (id: number) {
 
-        // henter kallenavn og dato på UFO observert
+        // henter kallenavn og dato pÃ¥ UFO observert
         this.http.get<Observasjon>("api/UFO/HentEnObservasjon/" + id)
             .subscribe(observasjon => {
                 this.UFOTilSletting = observasjon.kallenavnUFO;

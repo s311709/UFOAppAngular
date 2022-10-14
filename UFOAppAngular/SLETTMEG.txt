@@ -3,18 +3,17 @@ passord: test
 
 Dette er blitt gjort
 -Migrert back-end til å bli en Single Page Application. Lagt på en midlertidig front end, likner på Tor sin.
--Lagt til slettemodal
--Logg-inn med admin-bruker (kan legges til ekstra front-end funksjonalitet, men fungerer)
+-Lagt til pop up som kommer opp når man prøver å slette en observasjon (slettemodal)
+-Laget en logg-inn funksjon med admin-bruker (kan legges til ekstra front-end funksjonalitet, som modal ved logg-ut og beskjeder om at ting bare kan gjøres dersom man er logget inn, men fungerer)
+-Fikset problem med æøå ved å bruke save as -> save with encoding -> UTF8. Se notat lenger ned
 
 MANGLER
--Fikse æøå, dette kan ikke leses noe sted i applikasjonen, er kanskje en easy fix?
 -Hent-en UFO+Observatør og hentalle observatører features med dropdown i lagre- og endreskjema
 -Feilhåndtering
 -Inputvalidering i alle ledd
 -Testing
 
 Rekker kanskje å gjøre:
--fikse æøå
 -inputvalidering
 -feilhåndtering
 
@@ -34,3 +33,8 @@ https://stackoverflow.com/questions/65853465/how-do-i-get-data-from-database-to-
 
 Her er det litt ekstra om sessions i tilfelle vi prøver på å ha flere brukere
 https://www.halvorsen.blog/documents/programming/csharp/textbook/aspnet/ASP.NET%20Core%20-%20Session%20Data.pdf
+
+Problem med æøå ved migrasjon til angular
+-Har vært et problem med æøå, derfor er backend uten UFT-8 bokstaver nå. Har ordnet opp i dette på front-end, ved å endre på enkoding i filene manuelt ved å 
+bruke save as -> save with encoding -> UTF8. Hvis problemet skulle fortsette kan man eventuelt prøve å endre /.editorconfig med å legge til charset = utf-8
+https://stackoverflow.com/questions/39436890/angular-template-view-with-utf-8-chars-doesnt-work

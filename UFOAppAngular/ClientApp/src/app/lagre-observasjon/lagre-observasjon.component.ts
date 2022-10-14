@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,31 +16,31 @@ export class LagreObservasjonComponent {
     validering = {
         id: [""],
         kallenavnUFO: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         tidspunktObservert: [
             null
         ],
         kommuneObservert: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         beskrivelseAvObservasjon: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         modell: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         fornavnObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         etternavnObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         telefonObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         epostObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-Z������\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ]
     }
 

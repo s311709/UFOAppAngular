@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label>Passord</label>
-                <input class="form-control" formControlName="passord" />
+                <input class="form-control" type="password" formControlName="passord" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.passord.valid || (skjema.controls.passord.pristine && !submitted)">
                     Passord er utenfor kravet om 2-30 bokstaver.
                 </p>

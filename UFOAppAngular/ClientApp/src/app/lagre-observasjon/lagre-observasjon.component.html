@@ -1,4 +1,4 @@
-<div class="container">
+﻿<div class="container">
     <h2>Registrer ny observasjon</h2>
     <div class="col-md-4">
         <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
@@ -37,28 +37,28 @@
                 </p>
             </div>
             <div class="form-group">
-                <label>Fornavn observator</label>
+                <label>Fornavn observatør</label>
                 <input class="form-control" formControlName="fornavnObservator" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.fornavnObservator.valid || (skjema.controls.fornavnObservator.pristine && !submitted)">
                     Fornavn er utenfor kravet om 2-30 bokstaver.
                 </p>
             </div>
             <div class="form-group">
-                <label>Etternavn observator</label>
+                <label>Etternavn observatør</label>
                 <input class="form-control" formControlName="etternavnObservator" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.etternavnObservator.valid || (skjema.controls.etternavnObservator.pristine && !submitted)">
                     Etternavn er utenfor kravet om 2-30 bokstaver.
                 </p>
             </div>
             <div class="form-group">
-                <label>Telefon observator</label>
+                <label>Telefon observatør</label>
                 <input class="form-control" formControlName="telefonObservator" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.telefonObservator.valid || (skjema.controls.telefonObservator.pristine && !submitted)">
                     Telefonnummer er utenfor kravet om 2-30 bokstaver.
                 </p>
             </div>
             <div class="form-group">
-                <label>E-post observator</label>
+                <label>E-post observatør</label>
                 <input class="form-control" formControlName="epostObservator" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.epostObservator.valid || (skjema.controls.epostObservator.pristine && !submitted)">
                     E-post er utenfor kravet om 2-30 bokstaver.
