@@ -31,6 +31,10 @@ namespace UFOAppAngular.Controllers
         [HttpPost]
         public async Task<ActionResult> LagreObservasjon(Observasjon innObservasjon)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             bool returOK = await _db.LagreObservasjon(innObservasjon);
             if (!returOK)
             {
@@ -44,6 +48,10 @@ namespace UFOAppAngular.Controllers
         [HttpGet]
         public async Task<ActionResult> HentAlleObservasjoner()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             List<Observasjon> Observasjoner = await _db.HentAlleObservasjoner();
 
             return Ok(Observasjoner); //Returnerer tomt array hvis databasen er tom
@@ -54,6 +62,10 @@ namespace UFOAppAngular.Controllers
         [HttpGet]
         public async Task<ActionResult> HentEnObservasjon(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             Observasjon observasjonen = await _db.HentEnObservasjon(id);
 
             return Ok(observasjonen); //Denne returnerer alltid OK, returnerer en tom observasjon dersom den ikke blir funnet
@@ -62,6 +74,10 @@ namespace UFOAppAngular.Controllers
         [Route("HentAlleUFOer")]
         public async Task<ActionResult> HentAlleUFOer()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             List<UFO> UFOer = await _db.HentAlleUFOer();
 
             return Ok(UFOer);
@@ -72,6 +88,10 @@ namespace UFOAppAngular.Controllers
         [HttpGet]
         public async Task<ActionResult> HentEnUFO(string kallenavn)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             UFO UFO = await _db.HentEnUFO(kallenavn);
             if (UFO == null)
             {
@@ -84,6 +104,10 @@ namespace UFOAppAngular.Controllers
         [Route("HentAlleObservatorer")]
         public async Task<ActionResult> HentAlleObservatorer()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             List<Observator> Observatorer = await _db.HentAlleObservatorer();
 
             return Ok(Observatorer);
@@ -91,6 +115,10 @@ namespace UFOAppAngular.Controllers
 
         public async Task<ActionResult> HentEnObservator(string fornavn, string etternavn)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             Observator observator = await _db.HentEnObservator(fornavn, etternavn);
             if (observator == null)
             {
@@ -104,7 +132,10 @@ namespace UFOAppAngular.Controllers
         [HttpDelete]
         public async Task<ActionResult> SlettObservasjon(int id)
         {
-
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             bool returOK = await _db.SlettObservasjon(id);
             if (!returOK)
             {
@@ -117,6 +148,10 @@ namespace UFOAppAngular.Controllers
         [HttpPut]
         public async Task<ActionResult> EndreObservasjon(Observasjon endreObservasjon)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             bool returOK = await _db.EndreObservasjon(endreObservasjon);
             if (!returOK)
             {
