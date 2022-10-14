@@ -153,28 +153,7 @@ namespace UFOAppAngular.Controllers
             HttpContext.Session.SetString(_loggetInn, "");
         }
 
-        [Route("SjekkLoggetInn")]
-        [HttpGet]
-        public bool SjekkLoggetInn()
-        {
-            try
-            {
-                string loggetInn = HttpContext.Session.GetString("_loggetInn");
-                if (loggetInn == "loggetInn")
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                _log.LogInformation(e.Message);
-                return false;
-            }
-        }
+        
     }
 }
 
