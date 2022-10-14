@@ -1,29 +1,36 @@
-﻿MANGLER
+﻿brukernavn: admin
+passord: test
 
-Features i lagre og endreskjema
-Logg-inn funksjonalitet
-Feilhåndtering
-Fikse æøå
-Inputvalidering i alle ledd
-Testing
+Dette er blitt gjort
+-Migrert back-end til å bli en Single Page Application. Lagt på en midlertidig front end, likner på Tor sin.
+-Lagt til slettemodal
+-Logg-inn med admin-bruker (kan legges til ekstra front-end funksjonalitet, men fungerer)
 
+MANGLER
+-Fikse æøå, dette kan ikke leses noe sted i applikasjonen, er kanskje en easy fix?
+-Hent-en UFO+Observatør og hentalle observatører features med dropdown i lagre- og endreskjema
+-Feilhåndtering
+-Inputvalidering i alle ledd
+-Testing
 
-FEATURES I LAGRE- OG ENDRESKJEMA
+Rekker kanskje å gjøre:
+-fikse æøå
+-inputvalidering
+-feilhåndtering
+
+Rekker nok ikke å skrive tester
+-tester
+-får ikke til skjemaene alene tror jeg
+-Rekker nok ikke å finne ut av hvordan man kan ha personlige brukere i tillegg til admin-bruker. Tror dette er litt komplisert, man må bruke sessiondata utover det som er pensum
+
+*FEATURES I LAGRE- OG ENDRESKJEMA
 Har slitt litt med å finne ut hvordan man kan implementere featursene vi har i lagre- og 
 endreskjemaene i oppgave 1.
 Hvordan implementere en dropdown?
 Hvordan hente data inn i dropdown?
 
 Hvordan søke etter fornavn og etternavn?
-
 https://stackoverflow.com/questions/65853465/how-do-i-get-data-from-database-to-a-drop-down-list-in-angular
 
-Rekker kanskje å gjøre:
-logg-inn med en admin-bruker
-fikse æøå
-inputvalidering
-feilhåndtering?
-
-Rekker nok ikke å skrive tester
-får ikke til skjemaene alene tror jeg
-Rekker nok ikke å finne ut av hvordan man kan ha personlige brukere i tillegg til admin-bruker
+Her er det litt ekstra om sessions i tilfelle vi prøver på å ha flere brukere
+https://www.halvorsen.blog/documents/programming/csharp/textbook/aspnet/ASP.NET%20Core%20-%20Session%20Data.pdf
