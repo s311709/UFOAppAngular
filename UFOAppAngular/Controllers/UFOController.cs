@@ -55,7 +55,7 @@ namespace UFOAppAngular.Controllers
         public async Task<ActionResult> HentEnObservasjon(int id)
         {
             Observasjon observasjonen = await _db.HentEnObservasjon(id);
-            
+
             return Ok(observasjonen); //Denne returnerer alltid OK, returnerer en tom observasjon dersom den ikke blir funnet
         }
 
@@ -67,7 +67,7 @@ namespace UFOAppAngular.Controllers
             return Ok(UFOer);
 
         }
-        
+
         [Route("HentEnUFO/{kallenavn?}")]
         [HttpGet]
         public async Task<ActionResult> HentEnUFO(string kallenavn)
@@ -82,7 +82,7 @@ namespace UFOAppAngular.Controllers
         }
 
         [Route("HentAlleObservatorer")]
-                public async Task<ActionResult> HentAlleObservatorer()
+        public async Task<ActionResult> HentAlleObservatorer()
         {
             List<Observator> Observatorer = await _db.HentAlleObservatorer();
 
@@ -104,14 +104,14 @@ namespace UFOAppAngular.Controllers
         [HttpDelete]
         public async Task<ActionResult> SlettObservasjon(int id)
         {
-            
-                bool returOK = await _db.SlettObservasjon(id);
-                if (!returOK)
-                {
-                    _log.LogInformation("Sletting av observasjon ble ikke utført");
-                    return NotFound("Sletting av observasjon ble ikke utført");
-                }
-                return Ok();
+
+            bool returOK = await _db.SlettObservasjon(id);
+            if (!returOK)
+            {
+                _log.LogInformation("Sletting av observasjon ble ikke utført");
+                return NotFound("Sletting av observasjon ble ikke utført");
+            }
+            return Ok();
         }
         [Route("EndreObservasjon/")]
         [HttpPut]
@@ -146,9 +146,35 @@ namespace UFOAppAngular.Controllers
             return BadRequest("Feil i inputvalidering på server");
         }
 
+        [Route("LoggUt")]
+        [HttpPost]
         public void LoggUt()
         {
             HttpContext.Session.SetString(_loggetInn, "");
         }
+
+        [Route("SjekkLoggetInn")]
+        [HttpGet]
+        public bool SjekkLoggetInn()
+        {
+            try
+            {
+                string loggetInn = HttpContext.Session.GetString("_loggetInn");
+                if (loggetInn == "loggetInn")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+        }
     }
 }
+
