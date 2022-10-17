@@ -60,7 +60,6 @@ export class LagreObservasjonComponent {
 
     sjekkDato(): boolean {
         if (this.datoJSON < this.skjema.value.tidspunktObservert) {
-            console.log("Dato er etter i dag")
             this.visDatoFeil = true;
             return false;
         }
