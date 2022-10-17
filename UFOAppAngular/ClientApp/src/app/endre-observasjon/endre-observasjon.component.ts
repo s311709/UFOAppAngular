@@ -13,35 +13,39 @@ import * as moment from 'moment';
 })
 export class EndreObservasjonComponent implements OnInit {
     skjema: FormGroup;
+    dato = new Date(); //dato = idag
+    UTCdato = new Date(this.dato.setHours(this.dato.getHours() + 2)); //for å få riktig tid i forhold til UTC+2
+    datoJSON = this.UTCdato.toJSON(); //konverterer til JSON-objekt for å sammenlikne med kalender-input senere
 
+    visDatoFeil: boolean = false;
     validering = {
         id: [""],
         kallenavnUFO: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         tidspunktObservert: [
-            null
+            null, Validators.compose([Validators.required])
         ],
         kommuneObservert: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         beskrivelseAvObservasjon: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,250}")])
         ],
         modell: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         fornavnObservator: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         etternavnObservator: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         telefonObservator: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9]{8}")])
         ],
         epostObservator: [
-            null
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-.@ ]{2,30}")])
         ]
     }
 
@@ -56,6 +60,18 @@ export class EndreObservasjonComponent implements OnInit {
     }
     vedSubmit() {
         this.endreEnObservasjon();
+    }
+
+    sjekkDato(): boolean {
+        if (this.datoJSON < this.skjema.value.tidspunktObservert) {
+            this.visDatoFeil = true;
+            return false;
+        }
+        if (this.datoJSON > this.skjema.value.tidspunktObservert) {
+            this.visDatoFeil = false;
+            return true;
+        }
+        return false;
     }
 
     endreObservasjon(id: number) {
@@ -76,25 +92,29 @@ export class EndreObservasjonComponent implements OnInit {
                 error => console.log(error)
             );
     }
-    endreEnObservasjon() {
-        const endretObservasjon = new Observasjon();
-        endretObservasjon.id = this.skjema.value.id;
-        endretObservasjon.kallenavnUFO = this.skjema.value.kallenavnUFO;
-        endretObservasjon.tidspunktObservert = this.skjema.value.tidspunktObservert;
-        endretObservasjon.kommuneObservert = this.skjema.value.kommuneObservert;
-        endretObservasjon.beskrivelseAvObservasjon = this.skjema.value.beskrivelseAvObservasjon;
-        endretObservasjon.fornavnObservator = this.skjema.value.fornavnObservator;
-        endretObservasjon.etternavnObservator = this.skjema.value.etternavnObservator;
-        endretObservasjon.modell = this.skjema.value.modell;
-        endretObservasjon.telefonObservator = this.skjema.value.telefonObservator;
-        endretObservasjon.epostObservator = this.skjema.value.epostObservator;
 
-        this.http.put("api/UFO/EndreObservasjon", endretObservasjon)
-            .subscribe(
-                retur => {
-                    this.router.navigate(['/registrerte-observasjoner']);
-                },
-                error => console.log(error)
-            );
+    endreEnObservasjon() {
+        if (this.sjekkDato() == true) { //sender bare skjema hvis dato også stemmer 
+
+            const endretObservasjon = new Observasjon();
+            endretObservasjon.id = this.skjema.value.id;
+            endretObservasjon.kallenavnUFO = this.skjema.value.kallenavnUFO;
+            endretObservasjon.tidspunktObservert = this.skjema.value.tidspunktObservert;
+            endretObservasjon.kommuneObservert = this.skjema.value.kommuneObservert;
+            endretObservasjon.beskrivelseAvObservasjon = this.skjema.value.beskrivelseAvObservasjon;
+            endretObservasjon.fornavnObservator = this.skjema.value.fornavnObservator;
+            endretObservasjon.etternavnObservator = this.skjema.value.etternavnObservator;
+            endretObservasjon.modell = this.skjema.value.modell;
+            endretObservasjon.telefonObservator = this.skjema.value.telefonObservator;
+            endretObservasjon.epostObservator = this.skjema.value.epostObservator;
+
+            this.http.put("api/UFO/EndreObservasjon", endretObservasjon)
+                .subscribe(
+                    retur => {
+                        this.router.navigate(['/registrerte-observasjoner']);
+                    },
+                    error => console.log(error)
+                );
+        }
     }
 }
