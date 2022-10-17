@@ -24,7 +24,7 @@ export class NavMenyComponent implements OnInit {
                     this.router.navigate(['/logg-inn']);
                 }
                 else {
-                    console.log("Du er allerede logget ut.")
+                    alert("Du er allerede logget ut.")
                 }
             },
                 error => console.log(error)

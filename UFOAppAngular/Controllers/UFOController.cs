@@ -208,8 +208,6 @@ namespace UFOAppAngular.Controllers
             }
 
         }
-
-        
     }
 }
 
