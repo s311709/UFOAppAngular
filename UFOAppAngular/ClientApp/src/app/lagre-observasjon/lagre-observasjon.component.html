@@ -11,11 +11,13 @@
             </div>
             <div class="form-group">
                 <label>Tidspunkt for observasjon</label>
-                <input type="datetime-local" class="form-control" formControlName="tidspunktObservert" />
+                <input (change)="sjekkDato()" type="datetime-local" class="form-control" formControlName="tidspunktObservert" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.tidspunktObservert.valid || (skjema.controls.tidspunktObservert.pristine && !submitted)">
                     Dato må være valgt.
                 </p>
-                <div id="feilDato"></div>
+                <p class="alert alert-warning" [hidden]="!visDatoFeil">
+                    Dato kan ikke være i fremtiden.
+                </p>            
             </div>
             <div class="form-group">
                 <label>Kommune hvor UFOen ble observert</label>
@@ -56,7 +58,7 @@
                 <label>Telefon observatør</label>
                 <input class="form-control" formControlName="telefonObservator" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.telefonObservator.valid || (skjema.controls.telefonObservator.pristine && !submitted)">
-                    Telefonnummer er utenfor kravet om 2-30 bokstaver.
+                    Telefonnummer må være 8 siffer.
                 </p>
             </div>
             <div class="form-group">

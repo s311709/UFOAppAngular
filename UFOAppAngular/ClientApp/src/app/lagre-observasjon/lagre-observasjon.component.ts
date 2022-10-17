@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { Observasjon } from "../Observasjon";
 
 @Component({
-  selector: 'app-lagre-observasjon',
-  templateUrl: './lagre-observasjon.component.html',
-  styleUrls: ['./lagre-observasjon.component.css']
+    selector: 'app-lagre-observasjon',
+    templateUrl: './lagre-observasjon.component.html',
+    styleUrls: ['./lagre-observasjon.component.css']
 })
 export class LagreObservasjonComponent {
 
@@ -16,6 +16,7 @@ export class LagreObservasjonComponent {
     UTCdato = new Date(this.dato.setHours(this.dato.getHours() + 2)); //for å få riktig tid i forhold til UTC+2
     datoJSON = this.UTCdato.toJSON(); //konverterer til JSON-objekt for å sammenlikne med kalender-input senere
 
+    visDatoFeil: boolean = false;
 
     validering = {
         id: [""],
@@ -53,43 +54,44 @@ export class LagreObservasjonComponent {
     }
 
     vedSubmit() {
-        this.sjekkDato();
+        this.lagreObservasjon();
     }
 
-    sjekkDato() {
-        console.log(this.datoJSON)
-        console.log(this.skjema.value.tidspunktObservert)
 
+    sjekkDato(): boolean {
         if (this.datoJSON < this.skjema.value.tidspunktObservert) {
-            
             console.log("Dato er etter i dag")
+            this.visDatoFeil = true;
+            return false;
         }
         if (this.datoJSON > this.skjema.value.tidspunktObservert) {
-            console.log("Dato er før i dag")
-
-            //this.lagreObservasjon();
+            this.visDatoFeil = false;
+            return true;
         }
+        return false;
     }
 
     lagreObservasjon() {
-        const lagretObservasjon = new Observasjon();
+        if (this.sjekkDato() == true) { //sender bare skjema hvis dato også stemmer 
+            const lagretObservasjon = new Observasjon();
 
-        lagretObservasjon.kallenavnUFO = this.skjema.value.kallenavnUFO;
-        lagretObservasjon.tidspunktObservert = this.skjema.value.tidspunktObservert;
-        lagretObservasjon.kommuneObservert = this.skjema.value.kommuneObservert;
-        lagretObservasjon.beskrivelseAvObservasjon = this.skjema.value.fornavnObservator;
-        lagretObservasjon.modell = this.skjema.value.fornavnObservator;
-        lagretObservasjon.fornavnObservator = this.skjema.value.fornavnObservator;
-        lagretObservasjon.etternavnObservator = this.skjema.value.etternavnObservator;
-        lagretObservasjon.telefonObservator = this.skjema.value.fornavnObservator;
-        lagretObservasjon.epostObservator = this.skjema.value.fornavnObservator;
+            lagretObservasjon.kallenavnUFO = this.skjema.value.kallenavnUFO;
+            lagretObservasjon.tidspunktObservert = this.skjema.value.tidspunktObservert;
+            lagretObservasjon.kommuneObservert = this.skjema.value.kommuneObservert;
+            lagretObservasjon.beskrivelseAvObservasjon = this.skjema.value.fornavnObservator;
+            lagretObservasjon.modell = this.skjema.value.fornavnObservator;
+            lagretObservasjon.fornavnObservator = this.skjema.value.fornavnObservator;
+            lagretObservasjon.etternavnObservator = this.skjema.value.etternavnObservator;
+            lagretObservasjon.telefonObservator = this.skjema.value.fornavnObservator;
+            lagretObservasjon.epostObservator = this.skjema.value.fornavnObservator;
 
-        this.http.post("api/UFO/LagreObservasjon", lagretObservasjon)
-            .subscribe(retur => {
-                this.router.navigate(['/registrerte-observasjoner']);
-            },
-                error => console.log(error)
-            );
+            this.http.post("api/UFO/LagreObservasjon", lagretObservasjon)
+                .subscribe(retur => {
+                    this.router.navigate(['/registrerte-observasjoner']);
+                },
+                    error => console.log(error)
+                );
+        }
     };
 
 }
