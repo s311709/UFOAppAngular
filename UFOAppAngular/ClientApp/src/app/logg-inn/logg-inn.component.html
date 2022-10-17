@@ -1,4 +1,4 @@
-<div class="container">
+﻿<div class="container">
     <h2>Logg inn</h2>
     <div class="col-md-4">
         <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
@@ -6,14 +6,14 @@
                 <label>Brukernavn</label>
                 <input class="form-control" formControlName="brukernavn" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.brukernavn.valid || (skjema.controls.brukernavn.pristine && !submitted)">
-                    Brukernavn er utenfor kravet om 2-30 bokstaver.
+                    Brukenavn må bestå av 2 til 30 tegn.
                 </p>
             </div>
             <div class="form-group">
                 <label>Passord</label>
                 <input class="form-control" type="password" formControlName="passord" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.passord.valid || (skjema.controls.passord.pristine && !submitted)">
-                    Passord er utenfor kravet om 2-30 bokstaver.
+                   Passord må være minst 4 tegn.
                 </p>
                 <div id="feil"></div>
             </div>

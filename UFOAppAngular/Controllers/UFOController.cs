@@ -35,13 +35,18 @@ namespace UFOAppAngular.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            bool returOK = await _db.LagreObservasjon(innObservasjon);
+            if (ModelState.IsValid)
+            {
+                bool returOK = await _db.LagreObservasjon(innObservasjon);
             if (!returOK)
             {
                 _log.LogInformation("Observasjonen kunne ikke lagres!");
                 return BadRequest("Observasjonen kunne ikke lagres");
             }
             return Ok("");
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest();
         }
 
         [Route("HentAlleObservasjoner")]
@@ -152,13 +157,18 @@ namespace UFOAppAngular.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            bool returOK = await _db.EndreObservasjon(endreObservasjon);
+            if (ModelState.IsValid)
+            {
+                bool returOK = await _db.EndreObservasjon(endreObservasjon);
             if (!returOK)
             {
                 _log.LogInformation("Endringen kunne ikke utføres");
                 return NotFound();
             }
             return Ok();
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest();
         }
 
         [Route("LoggInn")]

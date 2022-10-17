@@ -19,9 +19,10 @@ export class LoggInnComponent {
     //validering
     validering = {
         brukernavn: [
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         passord: [
-
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ\\-. ]{4,30}$")])
         ]
     }
 
