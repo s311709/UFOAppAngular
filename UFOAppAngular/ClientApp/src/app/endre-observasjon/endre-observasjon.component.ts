@@ -21,7 +21,7 @@ export class EndreObservasjonComponent implements OnInit {
     validering = {
         id: [""],
         kallenavnUFO: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         tidspunktObservert: [
             null, Validators.compose([Validators.required])
@@ -30,7 +30,7 @@ export class EndreObservasjonComponent implements OnInit {
             null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         beskrivelseAvObservasjon: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,250}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ\\-. ]{2,250}")])
         ],
         modell: [
             null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
@@ -45,7 +45,7 @@ export class EndreObservasjonComponent implements OnInit {
             null, Validators.compose([Validators.required, Validators.pattern("[0-9]{8}")])
         ],
         epostObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-.@ ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ\\-.@ ]{2,30}")])
         ]
     }
 
