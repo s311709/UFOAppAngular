@@ -6,12 +6,12 @@ Dette er blitt gjort
 -Lagt til pop up som kommer opp når man prøver å slette en observasjon (slettemodal)
 -Laget en logg-inn funksjon med admin-bruker (kan legges til ekstra front-end funksjonalitet, som modal ved logg-ut og beskjeder om at ting bare kan gjøres dersom man er logget inn, men fungerer)
 -Fikset problem med æøå ved å bruke save as -> save with encoding -> UTF8. Se notat lenger ned
+-Inputvalidering på klient og serverside inkl ikke kan registrere observasjon frem i tid
 
 MANGLER
 -Hent-en UFO+Observatør og hentalle observatører features med dropdown i lagre- og endreskjema
 -Feilhåndtering
--Inputvalidering i alle ledd
--Testing
+-Tester
 
 Rekker kanskje å gjøre:
 -inputvalidering
