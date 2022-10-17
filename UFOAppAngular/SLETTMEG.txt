@@ -4,7 +4,7 @@ passord: test
 Dette er blitt gjort
 -Migrert back-end til å bli en Single Page Application. Lagt på en midlertidig front end, likner på Tor sin.
 -Lagt til pop up som kommer opp når man prøver å slette en observasjon (slettemodal)
--Laget en logg-inn funksjon med admin-bruker (kan legges til ekstra front-end funksjonalitet, som modal ved logg-ut og beskjeder om at ting bare kan gjøres dersom man er logget inn, men fungerer)
+-Laget en logg-inn funksjon med admin-bruker
 -Fikset problem med æøå ved å bruke save as -> save with encoding -> UTF8. Se notat lenger ned
 -Inputvalidering på klient og serverside inkl ikke kan registrere observasjon frem i tid
 
