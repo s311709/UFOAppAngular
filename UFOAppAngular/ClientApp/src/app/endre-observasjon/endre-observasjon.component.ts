@@ -24,7 +24,7 @@ export class EndreObservasjonComponent implements OnInit {
             null, Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         tidspunktObservert: [
-            null, Validators.compose([Validators.required])
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ:\\-. ]{2,30}")])
         ],
         kommuneObservert: [
             null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
