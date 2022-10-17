@@ -81,7 +81,7 @@ export class LagreObservasjonComponent {
             lagretObservasjon.modell = this.skjema.value.fornavnObservator;
             lagretObservasjon.fornavnObservator = this.skjema.value.fornavnObservator;
             lagretObservasjon.etternavnObservator = this.skjema.value.etternavnObservator;
-            lagretObservasjon.telefonObservator = this.skjema.value.fornavnObservator;
+            lagretObservasjon.telefonObservator = this.skjema.value.telefonObservator;
             lagretObservasjon.epostObservator = this.skjema.value.fornavnObservator;
 
             this.http.post("api/UFO/LagreObservasjon", lagretObservasjon)
