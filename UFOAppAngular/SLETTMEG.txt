@@ -15,7 +15,7 @@ MANGLER
 
 Rekker kanskje å gjøre:
 -feilhåndtering
--tester?
+-tester
 
 Rekker nok ikke:
 -får ikke til skjemaene alene tror jeg
@@ -39,3 +39,6 @@ Problem med æøå ved migrasjon til angular
 -Har vært et problem med æøå, derfor er backend uten UFT-8 bokstaver nå. Har ordnet opp i dette på front-end, ved å endre på enkoding i filene manuelt ved å 
 bruke save as -> save with encoding -> UTF8. Hvis problemet skulle fortsette kan man eventuelt prøve å endre /.editorconfig med å legge til charset = utf-8
 https://stackoverflow.com/questions/39436890/angular-template-view-with-utf-8-chars-doesnt-work
+
+Ekstra funksjonalitet rundt logg-inn
+Tror services kan brukes, må lese om det. 
