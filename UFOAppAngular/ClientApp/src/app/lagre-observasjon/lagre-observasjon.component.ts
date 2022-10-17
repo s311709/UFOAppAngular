@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +12,10 @@ import { Observasjon } from "../Observasjon";
 export class LagreObservasjonComponent {
 
     skjema: FormGroup;
+    dato = new Date(); //dato = idag
+    UTCdato = new Date(this.dato.setHours(this.dato.getHours() + 2)); //for å få riktig tid i forhold til UTC+2
+    datoJSON = this.UTCdato.toJSON(); //konverterer til JSON-objekt for å sammenlikne med kalender-input senere
+
 
     validering = {
         id: [""],
@@ -19,7 +23,7 @@ export class LagreObservasjonComponent {
             null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         tidspunktObservert: [
-            null
+            null, Validators.compose([Validators.required])
         ],
         kommuneObservert: [
             null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
@@ -37,10 +41,10 @@ export class LagreObservasjonComponent {
             null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
         ],
         telefonObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[0-9]{8}")])
         ],
         epostObservator: [
-            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-. ]{2,30}")])
+            null, Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅ\\-.@ ]{2,30}")])
         ]
     }
 
@@ -49,7 +53,22 @@ export class LagreObservasjonComponent {
     }
 
     vedSubmit() {
-        this.lagreObservasjon();
+        this.sjekkDato();
+    }
+
+    sjekkDato() {
+        console.log(this.datoJSON)
+        console.log(this.skjema.value.tidspunktObservert)
+
+        if (this.datoJSON < this.skjema.value.tidspunktObservert) {
+            
+            console.log("Dato er etter i dag")
+        }
+        if (this.datoJSON > this.skjema.value.tidspunktObservert) {
+            console.log("Dato er før i dag")
+
+            //this.lagreObservasjon();
+        }
     }
 
     lagreObservasjon() {
