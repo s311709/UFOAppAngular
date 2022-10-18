@@ -27,6 +27,11 @@ namespace UFOAppAngular.Controllers
             _log = log;
         }
 
+        public UFOController(IUFORepository db)
+        {
+            _db = db;
+        }
+
         [Route("LagreObservasjon")]
         [HttpPost]
         public async Task<ActionResult> LagreObservasjon(Observasjon innObservasjon)
