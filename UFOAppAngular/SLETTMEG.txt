@@ -10,18 +10,18 @@ Dette er blitt gjort
 
 MANGLER
 -Hent-en UFO+Observatør og hentalle observatører features med dropdown i lagre- og endreskjema
--Feilhåndtering
 -Tester
+-front-end
 
 Rekker kanskje å gjøre:
--feilhåndtering
 -tester
 
-Rekker nok ikke:
--får ikke til skjemaene alene tror jeg
+Ekstra-ting jeg ikke har gjort:
 -Rekker nok ikke å finne ut av hvordan man kan ha personlige brukere i tillegg til admin-bruker. Tror dette er litt komplisert, man må bruke sessiondata utover det som er pensum
--front-end
 -hadde vært kult å ha mer rundt logg inn/logg ut
+-skriver ikke ut feilmeldinger i brukergrensesnittet, men usikker på om dette vil kreves av oppgaveteksten
+
+
 
 *FEATURES I LAGRE- OG ENDRESKJEMA
 Har slitt litt med å finne ut hvordan man kan implementere featursene vi har i lagre- og 

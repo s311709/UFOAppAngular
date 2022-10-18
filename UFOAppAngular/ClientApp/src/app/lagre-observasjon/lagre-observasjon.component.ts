@@ -77,12 +77,12 @@ export class LagreObservasjonComponent {
             lagretObservasjon.kallenavnUFO = this.skjema.value.kallenavnUFO;
             lagretObservasjon.tidspunktObservert = this.skjema.value.tidspunktObservert;
             lagretObservasjon.kommuneObservert = this.skjema.value.kommuneObservert;
-            lagretObservasjon.beskrivelseAvObservasjon = this.skjema.value.fornavnObservator;
-            lagretObservasjon.modell = this.skjema.value.fornavnObservator;
+            lagretObservasjon.beskrivelseAvObservasjon = this.skjema.value.beskrivelseAvObservasjon;
+            lagretObservasjon.modell = this.skjema.value.modell;
             lagretObservasjon.fornavnObservator = this.skjema.value.fornavnObservator;
             lagretObservasjon.etternavnObservator = this.skjema.value.etternavnObservator;
             lagretObservasjon.telefonObservator = this.skjema.value.telefonObservator;
-            lagretObservasjon.epostObservator = this.skjema.value.fornavnObservator;
+            lagretObservasjon.epostObservator = this.skjema.value.epostObservator;
 
             this.http.post("api/UFO/LagreObservasjon", lagretObservasjon)
                 .subscribe(retur => {
