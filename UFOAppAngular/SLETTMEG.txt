@@ -20,7 +20,7 @@ Ekstra-ting jeg ikke har gjort:
 -Rekker nok ikke å finne ut av hvordan man kan ha personlige brukere i tillegg til admin-bruker. Tror dette er litt komplisert, man må bruke sessiondata utover det som er pensum
 -hadde vært kult å ha mer rundt logg inn/logg ut
 -skriver ikke ut feilmeldinger i brukergrensesnittet, men usikker på om dette vil kreves av oppgaveteksten
-
+-det er mulig å gjøre inputvaliering på e-post som e-post i endre/lagre-typescript filene
 
 
 *FEATURES I LAGRE- OG ENDRESKJEMA
