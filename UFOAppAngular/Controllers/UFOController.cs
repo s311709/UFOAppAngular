@@ -27,10 +27,6 @@ namespace UFOAppAngular.Controllers
             _log = log;
         }
 
-        public UFOController(IUFORepository db)
-        {
-            _db = db;
-        }
 
         [Route("LagreObservasjon")]
         [HttpPost]

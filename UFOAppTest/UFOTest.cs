@@ -6,14 +6,29 @@ using UFOAppAngular.DAL;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using UFOAppAngular.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace UFOAppTest
 {
     public class UFOControllerTest
     {
+
+        private const string _loggetInn = "loggetInn";
+        private const string _ikkeLoggetInn = "";
+
+        private readonly Mock<IUFORepository> mockRep = new Mock<IUFORepository>();
+        private readonly Mock<ILogger<UFOController>> mockLog = new Mock<ILogger<UFOController>>();
+
+        private readonly Mock<HttpContext> mockHttpContext = new Mock<HttpContext>();
+        private readonly MockHttpSession mockSession = new MockHttpSession();
+
         [Fact]
-        public async Task HentAlleObservasjonerLoggetInn()
+        public async Task HentAlleObservasjonerLoggetInnOK()
         {
+            //Arrange
             var observasjon1 = new Observasjon
             {
                 Id = 1,
@@ -46,7 +61,25 @@ namespace UFOAppTest
 
             };
 
-            
+            var observasjonsListe = new List<Observasjon>();
+            observasjonsListe.Add(observasjon1);
+            observasjonsListe.Add(observasjon2);
+            observasjonsListe.Add(observasjon3);
+
+            mockRep.Setup(o => o.HentAlleObservasjoner()).ReturnsAsync(observasjonsListe);
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await UFOController.HentAlleObservasjoner() as OkObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<List<Observasjon>>((List<Observasjon>)resultat.Value, observasjonsListe);
+
         }
     }
 }
