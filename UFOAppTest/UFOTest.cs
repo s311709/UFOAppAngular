@@ -67,6 +67,7 @@ namespace UFOAppTest
             observasjonsListe.Add(observasjon3);
 
             mockRep.Setup(o => o.HentAlleObservasjoner()).ReturnsAsync(observasjonsListe);
+
             var UFOController = new UFOController(mockRep.Object, mockLog.Object);
 
             mockSession[_loggetInn] = _loggetInn;
@@ -81,5 +82,110 @@ namespace UFOAppTest
             Assert.Equal<List<Observasjon>>((List<Observasjon>)resultat.Value, observasjonsListe);
 
         }
+
+        [Fact]
+        public async Task HentAlleObservasjonerIkkeLoggetInn()
+        {
+
+            // Arrange
+            mockRep.Setup(o => o.HentAlleObservasjoner()).ReturnsAsync(It.IsAny<List<Observasjon>>());
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.HentAlleObservasjoner() as UnauthorizedObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task LagreObservasjonLoggetInnOK()
+        {
+            // Arrange
+            mockRep.Setup(o => o.LagreObservasjon(It.IsAny<Observasjon>())).ReturnsAsync(true);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.LagreObservasjon(It.IsAny<Observasjon>()) as OkObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+        }
+
+        [Fact]
+        public async Task LagreObservasjonLoggetInnIkkeOK()
+        {
+            // Arrange
+
+            mockRep.Setup(o => o.LagreObservasjon(It.IsAny<Observasjon>())).ReturnsAsync(false);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.LagreObservasjon(It.IsAny<Observasjon>()) as BadRequestObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Observasjonen kunne ikke lagres", resultat.Value);
+        }
+
+        [Fact]
+        public async Task LagreObservasjonLoggetInnFeilModel()
+        {
+            
+
+            mockRep.Setup(o => o.LagreObservasjon(It.IsAny<Observasjon>())).ReturnsAsync(true);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            UFOController.ModelState.AddModelError("KallenavnUFO", "Feil i inputvalidering på server");
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.LagreObservasjon(It.IsAny<Observasjon>()) as BadRequestObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Feil i inputvalidering på server", resultat.Value);
+        }
+        
+        [Fact]
+        public async Task LagreObservasjonIkkeLoggetInn()
+        {
+            mockRep.Setup(o => o.LagreObservasjon(It.IsAny<Observasjon>())).ReturnsAsync(true);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.LagreObservasjon(It.IsAny<Observasjon>()) as UnauthorizedObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        
     }
 }

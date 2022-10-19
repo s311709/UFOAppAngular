@@ -47,7 +47,7 @@ namespace UFOAppAngular.Controllers
             return Ok("");
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest();
+            return BadRequest("Feil i inputvalidering på server");
         }
 
         [Route("HentAlleObservasjoner")]
@@ -166,7 +166,7 @@ namespace UFOAppAngular.Controllers
                 _log.LogInformation("Endringen kunne ikke utføres");
                 return NotFound();
             }
-            return Ok();
+            return Ok("");
             }
             _log.LogInformation("Feil i inputvalidering");
             return BadRequest();
