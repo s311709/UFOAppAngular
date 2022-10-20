@@ -475,7 +475,7 @@ namespace UFOAppTest
                 Id = 1,
                 Fornavn = "Heidi",
                 Etternavn = "Lyngås",
-                Telefon = "Stavanger",
+                Telefon = "22334455",
                 Epost = "h@lyngås.com",
                 AntallRegistrerteObservasjoner = 1,
                 SisteObservasjon = new DateTime(2022 - 01 - 01)
@@ -605,5 +605,155 @@ namespace UFOAppTest
             Assert.Equal("Ikke logget inn", resultat.Value);
         }
 
+        [Fact]
+        public async Task HentAlleObservatorerLoggetInnOK()
+        {
+            //Arrange
+            var observator1 = new Observator
+            {
+                Id = 1,
+                Fornavn = "Heidi",
+                Etternavn = "Lyngås",
+                Telefon = "22334455",
+                Epost = "h@lyngås.com",
+                AntallRegistrerteObservasjoner = 1,
+                SisteObservasjon = new DateTime(2016 - 01 - 01)
+            };
+            var observator2 = new Observator
+            {
+                Id = 2,
+                Fornavn = "Herman",
+                Etternavn = "Gjestedalen",
+                Telefon = "22334455",
+                Epost = "h@gjestedalen.com",
+                AntallRegistrerteObservasjoner = 4,
+                SisteObservasjon = new DateTime(2021 - 01 - 10)
+            };
+            var observator3 = new Observator
+            {
+                Id = 3,
+                Fornavn = "Albert",
+                Etternavn = "Åsli",
+                Telefon = "22334455",
+                Epost = "a@åsli.com",
+                AntallRegistrerteObservasjoner = 2,
+                SisteObservasjon = new DateTime(2022 - 11 - 01)
+            };
+
+            var observatorListe = new List<Observator>();
+            observatorListe.Add(observator1);
+            observatorListe.Add(observator2);
+            observatorListe.Add(observator3);
+
+            mockRep.Setup(o => o.HentAlleObservatorer()).ReturnsAsync(observatorListe);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await UFOController.HentAlleObservatorer() as OkObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<List<Observator>>((List<Observator>)resultat.Value, observatorListe);
+
+        }
+
+        [Fact]
+        public async Task HentAlleObservatorerIkkeLoggetInn()
+        {
+
+            // Arrange
+            mockRep.Setup(o => o.HentAlleObservatorer()).ReturnsAsync(It.IsAny<List<Observator>>());
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.HentAlleObservatorer() as UnauthorizedObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentAlleUFOerLoggetInnOK()
+        {
+            //Arrange
+            var ufo1 = new UFO
+            {
+                Id = 1,
+                Kallenavn = "KornUFOen",
+                Modell = "KornUFO",
+                SistObservert = new DateTime(2012 - 11 - 01),
+                GangerObservert = 2
+            };
+            var ufo2 = new UFO
+            {
+                Id = 2,
+                Kallenavn = "Lynet McQueen",
+                Modell = "RacerUFO",
+                SistObservert = new DateTime(2020 - 02 - 02),
+                GangerObservert = 2
+            };
+            var ufo3 = new UFO
+            {
+                Id = 3,
+                Kallenavn = "Stitch",
+                Modell = "DisneyUFO",
+                SistObservert = new DateTime(2019 - 03 - 11),
+                GangerObservert = 2
+            };
+            
+
+            var UFOliste = new List<UFO>();
+            UFOliste.Add(ufo1);
+            UFOliste.Add(ufo2);
+            UFOliste.Add(ufo3);
+
+            mockRep.Setup(o => o.HentAlleUFOer()).ReturnsAsync(UFOliste);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await UFOController.HentAlleUFOer() as OkObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<List<UFO>>((List<UFO>)resultat.Value, UFOliste);
+
+        }
+
+        [Fact]
+        public async Task HentAlleUFOerIkkeLoggetInn()
+        {
+
+            // Arrange
+            mockRep.Setup(o => o.HentAlleUFOer()).ReturnsAsync(It.IsAny<List<UFO>>());
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.HentAlleUFOer() as UnauthorizedObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
     }
 }
