@@ -5,21 +5,17 @@ Dette er blitt gjort
 -Migrert back-end til å bli en Single Page Application. Lagt på en midlertidig front end, likner på Tor sin.
 -Lagt til pop up som kommer opp når man prøver å slette en observasjon (slettemodal)
 -Laget en logg-inn funksjon med admin-bruker
--Fikset problem med æøå ved å bruke save as -> save with encoding -> UTF8. Se notat lenger ned
--Inputvalidering på klient og serverside inkl ikke kan registrere observasjon frem i tid
+-Inputvalidering på klient og serverside
+-laget testprosjekt og skrevet enhetstester
 
 MANGLER
 -Hent-en UFO+Observatør og hentalle observatører features med dropdown i lagre- og endreskjema
--Tester
 -front-end
-
-Rekker kanskje å gjøre:
--tester
 
 Ekstra-ting jeg ikke har gjort:
 -Rekker nok ikke å finne ut av hvordan man kan ha personlige brukere i tillegg til admin-bruker. Tror dette er litt komplisert, man må bruke sessiondata utover det som er pensum
--hadde vært kult å ha mer rundt logg inn/logg ut
--skriver ikke ut feilmeldinger i brukergrensesnittet, men usikker på om dette vil kreves av oppgaveteksten
+-hadde vært kult å ha mer rundt logg inn/logg ut. Tror services kan brukes for dette, for eksempel hvis man ville skjule nav-menyen når man ikke var logget inn
+-skriver ikke ut feilmeldinger i brukergrensesnittet, men tror ikke dette vil kreves av oppgaveteksten
 -det er mulig å gjøre inputvaliering på e-post som e-post i endre/lagre-typescript filene
 
 
