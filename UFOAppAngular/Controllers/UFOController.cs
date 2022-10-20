@@ -19,8 +19,8 @@ namespace UFOAppAngular.Controllers
         private readonly IUFORepository _db;
         private ILogger<UFOController> _log;
 
-        private string _ikkeLoggetInn = "";
         private const string _loggetInn = "loggetInn";
+        private const string _ikkeLoggetInn = "";
         public UFOController(IUFORepository db, ILogger<UFOController> log)
         {
             _db = db;
@@ -168,8 +168,8 @@ namespace UFOAppAngular.Controllers
             }
             return Ok("");
             }
-            _log.LogInformation("Feil i inputvalidering");
-            return BadRequest();
+            _log.LogInformation("Feil i inputvalidering på server");
+            return BadRequest("Feil i inputvalidering på server");
         }
 
         [Route("LoggInn")]
@@ -196,15 +196,14 @@ namespace UFOAppAngular.Controllers
         [HttpGet]
         public ActionResult LoggUt()
         {
-            string loggetInn = HttpContext.Session.GetString("_loggetInn");
-
+            
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
                 return Ok(false);
             }
             else 
             {
-                HttpContext.Session.SetString(_loggetInn, "");
+                HttpContext.Session.SetString(_loggetInn, _ikkeLoggetInn);
                 return Ok(true);
             }
 
