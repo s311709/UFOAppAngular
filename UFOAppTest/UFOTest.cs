@@ -461,9 +461,33 @@ namespace UFOAppTest
 
             // Act
             UFOController.LoggUt();
+            var resultat = UFOController.LoggUt() as OkObjectResult;
 
             // Assert
             Assert.Equal(_ikkeLoggetInn, mockSession[_loggetInn]);
+
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.True((bool)resultat.Value);
+        }
+
+        [Fact]
+        public void AlleredeLoggetUt()
+        {
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            UFOController.LoggUt();
+            var resultat = UFOController.LoggUt() as OkObjectResult;
+
+            // Assert
+            Assert.Equal(_ikkeLoggetInn, mockSession[_loggetInn]);
+
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.False((bool)resultat.Value);
         }
 
         [Fact]

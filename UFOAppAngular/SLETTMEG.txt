@@ -6,7 +6,7 @@ Dette er blitt gjort
 -Lagt til pop up som kommer opp når man prøver å slette en observasjon (slettemodal)
 -Laget en logg-inn funksjon med admin-bruker
 -Inputvalidering på klient og serverside
--laget testprosjekt og skrevet enhetstester
+-laget testprosjekt og skrevet enhetstester, 100% code coverage for controller
 
 MANGLER
 -Hent-en UFO+Observatør og hentalle observatører features med dropdown i lagre- og endreskjema
@@ -16,7 +16,7 @@ Ekstra-ting jeg ikke har gjort:
 -Rekker nok ikke å finne ut av hvordan man kan ha personlige brukere i tillegg til admin-bruker. Tror dette er litt komplisert, man må bruke sessiondata utover det som er pensum
 -hadde vært kult å ha mer rundt logg inn/logg ut. Tror services kan brukes for dette, for eksempel hvis man ville skjule nav-menyen når man ikke var logget inn
 -skriver ikke ut feilmeldinger i brukergrensesnittet, men tror ikke dette vil kreves av oppgaveteksten
--det er mulig å gjøre inputvaliering på e-post som e-post i endre/lagre-typescript filene
+-det er mulig å gjøre mer nøye inputvaliering på e-post i endre/lagre-typescript filene
 
 
 *FEATURES I LAGRE- OG ENDRESKJEMA
