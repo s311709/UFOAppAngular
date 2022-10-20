@@ -51,7 +51,7 @@ namespace UFOAppTest
             };
             var observasjon3 = new Observasjon
             {
-                Id = 1,
+                Id = 3,
                 KallenavnUFO = "TreUFOen",
                 TidspunktObservert = new DateTime(2005 - 05 - 12),
                 KommuneObservert = "Kongsvinger",
@@ -186,6 +186,158 @@ namespace UFOAppTest
             Assert.Equal("Ikke logget inn", resultat.Value);
         }
 
-        
+        [Fact]
+        public async Task SlettObservasjonLoggetInnOK()
+        {
+            // Arrange
+
+            mockRep.Setup(o => o.SlettObservasjon(It.IsAny<int>())).ReturnsAsync(true);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.SlettObservasjon(It.IsAny<int>()) as OkObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+        }
+
+        [Fact]
+        public async Task SlettObservasjonLoggetInnIkkeOK()
+        {
+            // Arrange
+
+            mockRep.Setup(o => o.SlettObservasjon(It.IsAny<int>())).ReturnsAsync(false);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.SlettObservasjon(It.IsAny<int>()) as NotFoundObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
+            Assert.Equal("Sletting av observasjon ble ikke utført", resultat.Value);
+        }
+
+        [Fact]
+        public async Task SlettObservasjonIkkeLoggetInn()
+        {
+            mockRep.Setup(o => o.SlettObservasjon(It.IsAny<int>())).ReturnsAsync(true);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.SlettObservasjon(It.IsAny<int>()) as UnauthorizedObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentEnObservasjonLoggetInnOK()
+        {
+            // Arrange
+            var observasjon1 = new Observasjon
+            {
+                Id = 1,
+                KallenavnUFO = "KornUFOen i Stavanger",
+                TidspunktObservert = new DateTime(2022 - 01 - 01),
+                KommuneObservert = "Stavanger",
+                BeskrivelseAvObservasjon = "UFOen fløy i sirkler over byen.",
+                FornavnObservator = "Heidi",
+                EtternavnObservator = "Lyngås"
+            };
+
+            mockRep.Setup(o => o.HentEnObservasjon(It.IsAny<int>())).ReturnsAsync(observasjon1);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.HentEnObservasjon(It.IsAny<int>()) as OkObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<Observasjon>(observasjon1, (Observasjon)resultat.Value);
+        }
+
+
+        //public async Task HentEnObservasjonLoggetInnIkkeOK()
+        //Har ikke med denne da HentEnObservasjon alltid returnerer OK
+
+        [Fact]
+        public async Task HentEnObservasjonIkkeLoggetInn()
+        {
+            mockRep.Setup(o => o.HentEnObservasjon(It.IsAny<int>())).ReturnsAsync(() => null);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.HentEnObservasjon(It.IsAny<int>()) as UnauthorizedObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreObservasjonLoggetInnOK()
+        {
+            // Arrange
+
+            mockRep.Setup(o => o.EndreObservasjon(It.IsAny<Observasjon>())).ReturnsAsync(true);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.EndreObservasjon(It.IsAny<Observasjon>()) as OkObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+        }
+
+        [Fact]
+        public async Task EndreObservasjonLoggetInnIkkeOK()
+        {
+            // Arrange
+            mockRep.Setup(o => o.EndreObservasjon(It.IsAny<Observasjon>())).ReturnsAsync(false);
+
+            var UFOController = new UFOController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            UFOController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await UFOController.EndreObservasjon(It.IsAny<Observasjon>()) as NotFoundObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
+            Assert.Equal("Endringen av observasjonen kunne ikke utføres", resultat.Value);
+        }
     }
 }

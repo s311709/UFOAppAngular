@@ -148,7 +148,7 @@ namespace UFOAppAngular.Controllers
                 _log.LogInformation("Sletting av observasjon ble ikke utført");
                 return NotFound("Sletting av observasjon ble ikke utført");
             }
-            return Ok();
+            return Ok("");
         }
         [Route("EndreObservasjon/")]
         [HttpPut]
@@ -163,8 +163,8 @@ namespace UFOAppAngular.Controllers
                 bool returOK = await _db.EndreObservasjon(endreObservasjon);
             if (!returOK)
             {
-                _log.LogInformation("Endringen kunne ikke utføres");
-                return NotFound();
+                _log.LogInformation("Endringen av observasjonen kunne ikke utføres");
+                return NotFound("Endringen av observasjonen kunne ikke utføres");
             }
             return Ok("");
             }
