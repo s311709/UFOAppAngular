@@ -17,7 +17,7 @@
                 </p>
                 <p class="alert alert-warning" [hidden]="!visDatoFeil">
                     Dato kan ikke være i fremtiden.
-                </p>            
+                </p>
             </div>
             <div class="form-group">
                 <label>Kommune hvor UFOen ble observert</label>
@@ -71,7 +71,10 @@
             <div class="form-group">
                 <button type="submit" [disabled]="!skjema.valid" class="btn btn-primary">Registrer</button>
             </div>
+
         </form>
+        <div id="feil" style="color:red"></div>
+        <br />
     </div>
 </div>
 

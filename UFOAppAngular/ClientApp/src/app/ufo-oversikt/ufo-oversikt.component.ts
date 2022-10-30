@@ -27,7 +27,11 @@ export class UfoOversiktComponent {
                 this.alleUFOer = ufoene;
                 this.laster = false;
             },
-                error => console.log(error)
+                error => {
+                    console.log(error);
+                    let feil = document.getElementById("feil") as HTMLDivElement;
+                    feil.innerHTML = "Det har oppstått en feil på server.";
+                }
             );
     };
 }

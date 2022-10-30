@@ -15,9 +15,9 @@ namespace UFOAppAngular.Models
         public DateTime TidspunktObservert { get; set; }
         [RegularExpression(@"[a-zA-ZæøåÆØÅ. \-]{2,30}")]
         public string KommuneObservert { get; set; }
-        [RegularExpression(@"[a-zA-ZæøåÆØÅ. \-]{2,30}")]
+        [RegularExpression(@"[a-zA-ZæøåÆØÅ. \-]{2,250}")]
         public string BeskrivelseAvObservasjon { get; set; }
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{2,250}")]
+        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{2,30}")]
         public string Modell { get; set; }
         [RegularExpression(@"[a-zA-ZæøåÆØÅ. \-]{2,30}")]
         public string FornavnObservator { get; set; }

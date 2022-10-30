@@ -113,7 +113,11 @@ export class EndreObservasjonComponent implements OnInit {
                     retur => {
                         this.router.navigate(['/registrerte-observasjoner']);
                     },
-                    error => console.log(error)
+                    error => {
+                        console.log(error);
+                        let feil = document.getElementById("feil") as HTMLDivElement;
+                        feil.innerHTML = "Det har oppstått en feil på server.";
+                    }
                 );
         }
     }

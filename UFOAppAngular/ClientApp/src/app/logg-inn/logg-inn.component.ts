@@ -49,7 +49,7 @@ export class LoggInnComponent {
                 error => {
                     console.log(error);
                     let feil = document.getElementById("feil") as HTMLDivElement;
-                    feil.innerHTML = "Feil brukernavn eller passord";
+                    feil.innerHTML = "Feil brukernavn eller passord.";
                 }
             );
     }

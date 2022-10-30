@@ -34,7 +34,11 @@ export class RegistrerteObservasjonerComponent {
                 this.alleObservasjoner = observasjonene;
                 this.laster = false;
             },
-                error => console.log(error)
+                error => {
+                    console.log(error);
+                    let feil = document.getElementById("feil") as HTMLDivElement;
+                    feil.innerHTML = "Det har oppstått en feil på server.";
+                }
             );
     };
 
@@ -50,7 +54,11 @@ export class RegistrerteObservasjonerComponent {
                 // viser modalen og kaller til slett
                 this.visModalOgSlett(id);
             },
-                error => console.log(error)
+                error => {
+                    console.log(error);
+                    let feil = document.getElementById("feil") as HTMLDivElement;
+                    feil.innerHTML = "Det har oppstått en feil på server.";
+                }
             );
     }
 
@@ -69,7 +77,11 @@ export class RegistrerteObservasjonerComponent {
                     .subscribe(retur => {
                         this.hentAlleObservasjoner();
                     },
-                        error => console.log(error)
+                        error => {
+                            console.log(error);
+                            let feil = document.getElementById("feil") as HTMLDivElement;
+                            feil.innerHTML = "Det har oppstått en feil på server.";
+                        }
                     );
             }
             this.router.navigate(['/registrerte-observasjoner']);

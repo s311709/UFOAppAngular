@@ -26,7 +26,11 @@ export class ObservatorOversiktComponent implements OnInit {
                 this.alleObservatorer = observatorene;
                 this.laster = false;
             },
-                error => console.log(error)
+                error => {
+                    console.log(error);
+                    let feil = document.getElementById("feil") as HTMLDivElement;
+                    feil.innerHTML = "Det har oppstått en feil på server.";
+                }
             );
     };
 }
