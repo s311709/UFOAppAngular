@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 using Moq; 
-using UFOAppAngular.Controllers; // må legge til en prosjektreferanse i Project-> Add Reference -> Project
+using UFOAppAngular.Controllers; 
 using UFOAppAngular.DAL;
 using System.Threading.Tasks;
 using System.Collections.Generic;
