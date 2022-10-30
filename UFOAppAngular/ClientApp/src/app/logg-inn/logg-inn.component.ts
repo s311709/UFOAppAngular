@@ -42,15 +42,15 @@ export class LoggInnComponent {
 
         this.http.post<any>("api/UFO/LoggInn", bruker)
             .subscribe(retur => {
-                if (retur == true) {
-                    this.router.navigate(['/registrerte-observasjoner']);
-                } else if (retur == false) {
-                    console.log("Feil brukernavn eller passord");
+                this.router.navigate(['/registrerte-observasjoner']);
+                let feil = document.getElementById("feil") as HTMLDivElement;
+                feil.innerHTML = "";
+            },
+                error => {
+                    console.log(error);
                     let feil = document.getElementById("feil") as HTMLDivElement;
                     feil.innerHTML = "Feil brukernavn eller passord";
                 }
-            },
-                error => console.log(error)
             );
     }
 

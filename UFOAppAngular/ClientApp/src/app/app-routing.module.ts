@@ -18,7 +18,7 @@ const appRoots: Routes = [
     { path: 'endre-observasjon/:id', component: EndreObservasjonComponent },
     { path: 'ufo-oversikt', component: UfoOversiktComponent },
     { path: 'observator-oversikt', component: ObservatorOversiktComponent },
-    //Default eller localhost
+    //Logg-inn er default
     { path: '', redirectTo: 'logg-inn', pathMatch: 'full' }
     ]
 //importerer og eksporterer RouterModule
