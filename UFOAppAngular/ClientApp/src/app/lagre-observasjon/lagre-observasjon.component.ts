@@ -70,6 +70,9 @@ export class LagreObservasjonComponent {
         return false;
     }
 
+    //trenger å legge inn metoder for å fylle dropdown her, men må også implementere dropdown
+    // hentAlleUfoer for å hente UFOer også hente ut modell og navn
+
     lagreObservasjon() {
         if (this.sjekkDato() == true) { //sender bare skjema hvis dato også stemmer 
             const lagretObservasjon = new Observasjon();
