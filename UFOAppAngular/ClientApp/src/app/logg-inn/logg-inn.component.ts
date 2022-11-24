@@ -42,7 +42,7 @@ export class LoggInnComponent {
 
         this.http.post<any>("api/UFO/LoggInn", bruker)
             .subscribe(retur => {
-              //  this.router.navigate(['/registrerte-observasjoner']);
+                this.router.navigate(['/registrerte-observasjoner']);
                 let feil = document.getElementById("feil") as HTMLDivElement;
                 feil.innerHTML = "";
             },
