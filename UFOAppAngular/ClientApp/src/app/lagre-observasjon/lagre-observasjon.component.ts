@@ -130,7 +130,8 @@ export class LagreObservasjonComponent {
         //hent ut data fra fornavn og etternavn og send til db
         console.log("fornavn:" + fornavn);
       //  const navn = fornavn + etternavn;
-        this.http.get<Observator>("api/UFO/HentEnObservator", { params: {fornavn, etternavn} })
+//        this.http.get<Observator>("api/UFO/HentEnObservator", { params: {fornavn, etternavn} })
+        this.http.get<Observator>("api/UFO/HentEnObservator?fornavn=" + fornavn + "&etternavn=" + etternavn)
             .subscribe(
                 observator => {
                     this.skjema.patchValue({ fornavnObservator: observator.fornavn });
