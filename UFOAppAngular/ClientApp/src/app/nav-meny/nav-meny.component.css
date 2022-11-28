@@ -1,0 +1,13 @@
+.navbar-nav {
+
+}
+.nav-item .active {
+    margin-right: 20px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #264342;
+}
+
+.nav-item > a:hover {
+    color: #9B3047;
+}
