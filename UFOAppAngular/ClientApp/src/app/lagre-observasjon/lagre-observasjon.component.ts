@@ -83,7 +83,7 @@ export class LagreObservasjonComponent {
 
     velgSettUFO(event) {
         /*cat holder verdien av det valgte elementet i dropdown 
-         *kilde: 
+         *kilde: https://stackoverflow.com/questions/54344027/how-i-get-angulartypescript-select-boxs-selected-text 
          */
         let cat = event.target.options[event.target.options.selectedIndex].text;
         if (cat != "Ny UFO") {
