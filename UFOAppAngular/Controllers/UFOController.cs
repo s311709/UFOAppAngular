@@ -119,6 +119,8 @@ namespace UFOAppAngular.Controllers
             return Ok(Observatorer);
         }
 
+        [Route("HentEnObservator/{fornavn?}/{etternavn?}")]
+        [HttpGet]
         public async Task<ActionResult> HentEnObservator(string fornavn, string etternavn)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
@@ -126,7 +128,7 @@ namespace UFOAppAngular.Controllers
                 return Unauthorized("Ikke logget inn");
             }
             Observator observator = await _db.HentEnObservator(fornavn, etternavn);
-            if (observator == null)
+            if (observator.Telefon == null)
             {
                 _log.LogInformation("Fant ikke observatøren");
                 return NotFound("Fant ikke observatøren");

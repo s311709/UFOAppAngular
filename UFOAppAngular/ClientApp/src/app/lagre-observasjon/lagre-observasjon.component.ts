@@ -115,29 +115,32 @@ export class LagreObservasjonComponent {
 
     //når etternavn endres, prøv å finn bruker i DB ved å sende inn fornavn og etternavn
     onChangeEtternavn() {
-      //  let fornavn = this.skjema.value.fornavn.text;
-        //  let etternavn = this.skjema.value.etternavn.text;
+        /*disse fire linjene er for å låse opp/tømme autofill-feltene
+         hvis man endrer etternavn igjen
+         */
+        this.skjema.controls['epostObservator'].enable();
+        this.skjema.controls['telefonObservator'].enable();
+        this.skjema.patchValue({ epostObservator: "" });
+        this.skjema.patchValue({ telefonObservator: "" });
         let innFornavn = (<HTMLInputElement>document.getElementById("fornavn")).value;
         let innEtternavn = (<HTMLInputElement>document.getElementById("etternavn")).value;
-        console.log("fornavn og etternavn onchange:" + innFornavn + innEtternavn);
         this.hentObservatorData(innFornavn, innEtternavn);
     }
 
     /* følgende kode er for å autofylle observatørdata
-    controller:public async Task<ActionResult> HentEnObservator(string fornavn, string etternavn)
+        basert på fornavn og etternavn fra registrerte observatører
      */
     hentObservatorData(fornavn, etternavn) {
         //hent ut data fra fornavn og etternavn og send til db
-        console.log("fornavn:" + fornavn);
-      //  const navn = fornavn + etternavn;
-//        this.http.get<Observator>("api/UFO/HentEnObservator", { params: {fornavn, etternavn} })
-        this.http.get<Observator>("api/UFO/HentEnObservator?fornavn=" + fornavn + "&etternavn=" + etternavn)
+        this.http.get<Observator>("api/UFO/HentEnObservator/" + fornavn + "/" + etternavn)
             .subscribe(
                 observator => {
                     this.skjema.patchValue({ fornavnObservator: observator.fornavn });
                     this.skjema.patchValue({ etternavnObservator: observator.etternavn });
                     this.skjema.patchValue({ telefonObservator: observator.telefon});
                     this.skjema.patchValue({ epostObservator: observator.epost });
+                    this.skjema.controls['epostObservator'].disable();
+                    this.skjema.controls['telefonObservator'].disable();
                 },
                 error => console.log(error)
             );
