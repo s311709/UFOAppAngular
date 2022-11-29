@@ -1,14 +1,35 @@
 ﻿<div class="container">
-    <h2>Registrer ny observasjon</h2>
     <div class="col-md-4">
+        <br /><br /><br />
+        <h2>Registrer ny observasjon</h2>
         <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
+
             <div class="form-group">
-                <label>Navn UFO</label>
+                <label>Velg en observert UFO</label> <br />
+                <!-- henter UFO-kallenavn til dropdown-->
+                <select [(ngModel)]="kallenavn" id="velgkallenavn" (change)="velgSettUFO($event)">
+                    <option value="Ny UFO" selected>Ny UFO</option>
+                    <option *ngFor="let UFO of alleUFOer" [value]="UFO.kallenavn">
+                        {{UFO.kallenavn}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Eller skriv inn navn på ny UFO</label>
                 <input class="form-control" formControlName="kallenavnUFO" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.kallenavnUFO.valid || (skjema.controls.kallenavnUFO.pristine && !submitted)">
                     UFO-navn er utenfor kravet om 2-30 bokstaver.
                 </p>
             </div>
+            <div class="form-group">
+                <label>UFO-modell</label>
+                <input class="form-control" formControlName="modell" />
+                <p class="alert alert-warning" [hidden]="skjema.controls.modell.valid || (skjema.controls.modell.pristine && !submitted)">
+                    Modell er utenfor kravet om 2-30 bokstaver.
+                </p>
+            </div>
+
             <div class="form-group">
                 <label>Tidspunkt for observasjon</label>
                 <input (change)="sjekkDato()" type="datetime-local" class="form-control" formControlName="tidspunktObservert" />
@@ -34,22 +55,15 @@
                 </p>
             </div>
             <div class="form-group">
-                <label>UFO-modell</label>
-                <input class="form-control" formControlName="modell" />
-                <p class="alert alert-warning" [hidden]="skjema.controls.modell.valid || (skjema.controls.modell.pristine && !submitted)">
-                    Modell er utenfor kravet om 2-30 bokstaver.
-                </p>
-            </div>
-            <div class="form-group">
                 <label>Fornavn observatør</label>
-                <input class="form-control" formControlName="fornavnObservator" />
+                <input class="form-control" formControlName="fornavnObservator" id="fornavn" [(ngModel)]="innFornavn" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.fornavnObservator.valid || (skjema.controls.fornavnObservator.pristine && !submitted)">
                     Fornavn er utenfor kravet om 2-30 bokstaver.
                 </p>
             </div>
             <div class="form-group">
                 <label>Etternavn observatør</label>
-                <input class="form-control" formControlName="etternavnObservator" />
+                <input class="form-control" formControlName="etternavnObservator" id="etternavn" [(ngModel)]="innEtternavn" (change)="onChangeEtternavn()" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.etternavnObservator.valid || (skjema.controls.etternavnObservator.pristine && !submitted)">
                     Etternavn er utenfor kravet om 2-30 bokstaver.
                 </p>

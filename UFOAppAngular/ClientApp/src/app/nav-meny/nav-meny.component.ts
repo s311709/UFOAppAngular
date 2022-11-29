@@ -11,7 +11,19 @@ export class NavMenyComponent implements OnInit {
 
   loggetInn: boolean;
 
-    ngOnInit(){
+    ngOnInit() {
+        this.toggle();
+    }
+
+    isExpanded = false;
+
+    collapse() {
+        this.isExpanded = false;
+    }
+
+    toggle() {
+        //toggle hamburger menu (navbar)
+        this.isExpanded = !this.isExpanded;
     }
 
     constructor(private http: HttpClient, private router: Router) { }

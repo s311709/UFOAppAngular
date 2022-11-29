@@ -1,0 +1,21 @@
+.navbar {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.10);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.navbar-brand {
+    font-family: cursive;
+    font-size: 19px;
+    font-weight: 700;
+    color: #d9534f;
+}
+.nav-item .active {
+    margin-right: 20px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #264342;
+}
+
+.nav-item > a:hover {
+    color: #9B3047;
+}
