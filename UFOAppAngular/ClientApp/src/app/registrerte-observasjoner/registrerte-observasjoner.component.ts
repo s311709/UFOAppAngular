@@ -9,9 +9,9 @@ import { Observasjon } from "../Observasjon";
 
 
 @Component({
-  selector: 'app-registrerte-observasjoner',
-  templateUrl: './registrerte-observasjoner.component.html',
-  styleUrls: ['./registrerte-observasjoner.component.css']
+    selector: 'app-registrerte-observasjoner',
+    templateUrl: './registrerte-observasjoner.component.html',
+    styleUrls: ['./registrerte-observasjoner.component.css']
 })
 export class RegistrerteObservasjonerComponent {
 

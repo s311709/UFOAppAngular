@@ -1,6 +1,7 @@
 ﻿<div class="container">
-    <h2>Registrer ny observasjon</h2>
     <div class="col-md-4">
+        <br /><br /><br />
+        <h2>Registrer ny observasjon</h2>
         <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
 
             <div class="form-group">
@@ -55,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label>Fornavn observatør</label>
-                <input class="form-control" formControlName="fornavnObservator" id="fornavn" [(ngModel)]="innFornavn"/>
+                <input class="form-control" formControlName="fornavnObservator" id="fornavn" [(ngModel)]="innFornavn" />
                 <p class="alert alert-warning" [hidden]="skjema.controls.fornavnObservator.valid || (skjema.controls.fornavnObservator.pristine && !submitted)">
                     Fornavn er utenfor kravet om 2-30 bokstaver.
                 </p>
