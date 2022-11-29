@@ -19,3 +19,7 @@
 .nav-item > a:hover {
     color: #9B3047;
 }
+
+#logo{
+    background-image: url(../../../../UFOappLOGO.png);
+}
